@@ -1,0 +1,70 @@
+{
+  "hello": "Witam",
+  "common": {
+    "create": "stwórz",
+    "edit": "edytuj",
+    "cancel": "anuluj",
+    "street": "ulica",
+    "houseNumber": "numer domu",
+    "premisesNumber": "numer lokalu",
+    "postalCode": "kod pocztowy",
+    "city": "miasto",
+    "email": "e-mail",
+    "success": "sukces",
+    "add": "dodaj",
+    "firstName": "imię",
+    "middleName": "drugie imię",
+    "lastName": "nazwisko",
+    "phoneNumber": "numer telefonu",
+    "emailAddress": "adres email",
+    "logout": "wyloguj",
+    "signIn": "zaloguj",
+    "username": "nazwa użytkownika",
+    "password": "hasło"
+  },
+  "cooperative": {
+    "cooperative": "wspólnota",
+    "cooperatives": "wspólnoty",
+    "name": "nazwa",
+    "nip": "NIP",
+    "regon": "REGON",
+    "messages": {
+      "created": "Wpólnota została utworzona.",
+      "edited": "Dane wspólnoty zostały zmienione.",
+      "noCooperative": "Brak wspólnot.",
+      "noBuilding": "Brak budynków we wspólnocie.",
+      "notFound": "Nie znaleziono wspólnoty."
+    }
+  },
+  "building": {
+    "building": "budynek",
+    "buildings": "budynki",
+    "messages": {
+      "created": "Budynek został utworzony.",
+      "edited": "Dane budynku zostały zmienione.",
+      "noPremises": "Brak lokali w budynku.",
+      "notFound": "Nie znaleziono budynku."
+    }
+  },
+  "premises": {
+    "premise": "lokal",
+    "premises": "lokale",
+    "type": "rodzaj lokalu",
+    "messages": {
+      "created": "Lokal został utworzony.",
+      "edited": "Dane lokalu zostały zmienione.",
+      "notFound": "Nie znaleziono lokalu.",
+      "chooseType": "Wybierz rodzaj lokalu"
+    }
+  },
+  "landlords": {
+    "landlord": "właścicel",
+    "landlords": "właścicele",
+    "messages": {
+      "created": "Właściciel został utworzony.",
+      "edited": "Dane właściciela zostały zmienione.",
+      "notFound": "Nie znaleziono właściciela.",
+      "noLandlords": "Nie znaleziono żadnego właściciela."
+    }
+  }
+}

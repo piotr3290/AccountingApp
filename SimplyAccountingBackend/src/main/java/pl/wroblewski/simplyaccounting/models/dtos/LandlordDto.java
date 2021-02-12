@@ -1,0 +1,43 @@
+package pl.wroblewski.simplyaccounting.models.dtos;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import pl.wroblewski.simplyaccounting.validation.CreateInfo;
+import pl.wroblewski.simplyaccounting.validation.EditInfo;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class LandlordDto {
+
+    @Positive(groups = {EditInfo.class})
+    private int id;
+
+    @NotBlank(groups = {EditInfo.class, CreateInfo.class})
+    private String firstName;
+
+    private String middleName;
+
+    @NotBlank(groups = {EditInfo.class, CreateInfo.class})
+    private String lastName;
+
+    private String city;
+
+    private String street;
+
+    private String houseNumber;
+
+    private String premisesNumber;
+
+    private String postalCode;
+
+    private String phoneNumber;
+
+    private String emailAddress;
+}

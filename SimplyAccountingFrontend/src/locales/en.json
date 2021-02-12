@@ -1,0 +1,70 @@
+{
+  "hello": "hi",
+  "common": {
+    "create": "create",
+    "edit": "edit",
+    "cancel": "cancel",
+    "street": "street",
+    "houseNumber": "house number",
+    "premisesNumber": "premises number",
+    "postalCode": "postal code",
+    "city": "city",
+    "email": "e-mail",
+    "success": "success",
+    "add": "add",
+    "firstName": "first name",
+    "middleName": "middle name",
+    "lastName": "last name",
+    "phoneNumber": "phone number",
+    "emailAddress": "email address",
+    "logout": "logout",
+    "signIn": "sign in",
+    "username": "username",
+    "password": "password"
+  },
+  "cooperative": {
+    "cooperative": "cooperative",
+    "cooperatives": "cooperatives",
+    "name": "name",
+    "nip": "NIP",
+    "regon": "REGON",
+    "messages": {
+      "created": "Cooperative has been successfully created.",
+      "edited": "Cooperative's data have been successfully updated.",
+      "noCooperative": "No cooperative created yet.",
+      "noBuilding": "No building in the cooperative.",
+      "notFound": "Cooperative not found."
+    }
+  },
+  "building": {
+    "building": "building",
+    "buildings": "buildings",
+    "messages": {
+      "created": "Building has been successfully created.",
+      "edited": "Building's data have been successfully updated.",
+      "noPremises": "No premises in the building.",
+      "notFound": "Building not found."
+    }
+  },
+  "premises": {
+    "premise": "premises",
+    "premises": "premises",
+    "type": "premises' type",
+    "messages": {
+      "created": "Premises have been successfully created.",
+      "edited": "Premises' data have been successfully updated.",
+      "notFound": "Premises not found.",
+      "chooseType": "Please choose premises type"
+    }
+  },
+  "landlords": {
+    "landlord": "landlord",
+    "landlords": "landlords",
+    "messages": {
+      "created": "Landlord has been successfully created.",
+      "edited": "Landlord's data have been successfully updated.",
+      "notFound": "Landlords not found.",
+      "noLandlords": "No landlord has been found."
+    }
+  }
+}
