@@ -8,6 +8,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.StringJoiner;
+
 
 @ControllerAdvice
 public class RestExceptionHandler {
@@ -41,8 +43,30 @@ public class RestExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handle(MethodArgumentNotValidException e) {
         logger.info(e.getMessage());
+        StringJoiner joiner = new StringJoiner("\n");
+        joiner.add("Incorrect request body.");
+        e.getBindingResult().getFieldErrors().forEach(o ->
+                joiner.add(new StringBuilder()
+                        .append("Field \"")
+                        .append(o.getField())
+                        .append("\" ")
+                        .append(o.getDefaultMessage())
+                        .append(" but has value ")
+                        .append(o.getRejectedValue())
+                        .append(".")
+                )
+
+        );
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body("Incorrect request body.");
+                .body(joiner.toString());
+    }
+
+    @ExceptionHandler(IncorrectDateException.class)
+    public ResponseEntity<String> handle(IncorrectDateException e) {
+        logger.info(e.getLocalizedMessage());
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(e.getMessage());
     }
 }

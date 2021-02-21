@@ -5,10 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import pl.wroblewski.simplyaccounting.db.entities.*;
 import pl.wroblewski.simplyaccounting.models.dtos.*;
-import pl.wroblewski.simplyaccounting.models.responses.BuildingResponse;
-import pl.wroblewski.simplyaccounting.models.responses.CooperativeResponse;
-import pl.wroblewski.simplyaccounting.models.responses.LandlordResponse;
-import pl.wroblewski.simplyaccounting.models.responses.PremisesResponse;
+import pl.wroblewski.simplyaccounting.models.responses.*;
 
 @Service
 @AllArgsConstructor
@@ -77,5 +74,25 @@ public class ConverterService {
 
     public UserEntity userDtoToEntity(UserDto userDto) {
         return modelMapper.map(userDto, UserEntity.class);
+    }
+
+    public LandlordDetailsResponse landlordEntityToDetailsResponse(LandlordEntity landlordEntity) {
+        return modelMapper.map(landlordEntity, LandlordDetailsResponse.class);
+    }
+
+    public ContractorDto contractorEntityToDto(ContractorEntity contractorEntity) {
+        return modelMapper.map(contractorEntity, ContractorDto.class);
+    }
+
+    public ContractorEntity contractorDtoToEntity(ContractorDto contractorDto) {
+        return modelMapper.map(contractorDto, ContractorEntity.class);
+    }
+
+    public AreaEntity areaDtoToEntity(AreaDto areaDto) {
+        return modelMapper.map(areaDto, AreaEntity.class);
+    }
+
+    public AreaDto areaEntityToDto(AreaEntity areaEntity) {
+        return modelMapper.map(areaEntity, AreaDto.class);
     }
 }

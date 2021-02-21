@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface PremisesRepository extends JpaRepository<PremisesEntity, Integer> {
-    //Optional<PremisesEntity> findById(int id);
+    Optional<PremisesEntity> findById(int id);
 }

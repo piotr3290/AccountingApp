@@ -4,13 +4,14 @@
     <div v-if="isAnyElement">
       <ul>
         <li v-for="landlord in currentPageLandlords"
-            :key="landlord.id">
+            :key="landlord.id"
+            @click="landlordDetails(landlord.id)">
           {{ landlord.fullName }}
         </li>
       </ul>
     </div>
     <div v-else>
-      <h2>{{ $t('landlords.messages.noLandlords') }}</h2>
+      <h2>{{ $t('landlord.messages.noLandlords') }}</h2>
     </div>
     <b-pagination v-model="currentPageNumber"
                   :total-rows="totalItems"
@@ -29,12 +30,12 @@ export default {
       landlords: [],
       currentPageNumber: 1,
       totalItems: 0,
-      itemsPerPage: 3,
+      itemsPerPage: 10,
       currentPageLandlords: []
     }
   },
   methods: {
-    loadLandlord() {
+    loadLandlords() {
       this.$store.commit('switchOnLoading');
       LandlordService.getAllLandlords()
           .then(response => {
@@ -45,6 +46,7 @@ export default {
           })
           .catch(error => {
             this.landlords = [];
+            this.currentPageLandlords = [];
             this.totalItems = 0;
             this.$root.$bvToast.toast(error.response.data, {
               title: error.message,
@@ -65,8 +67,11 @@ export default {
     endArrayIndex(page) {
       return page * this.itemsPerPage;
     },
-    createLandlord(){
+    createLandlord() {
       this.$router.push({name: 'landlordCreate'})
+    },
+    landlordDetails(id) {
+      this.$router.push({name: 'landlord', params: {id: id}});
     }
   },
   computed: {
@@ -75,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    this.loadLandlord();
+    this.loadLandlords();
   }
 }
 </script>

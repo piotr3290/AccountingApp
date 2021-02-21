@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.wroblewski.simplyaccounting.models.dtos.PremisesDto;
 import pl.wroblewski.simplyaccounting.models.responses.PremisesResponse;
 import pl.wroblewski.simplyaccounting.services.PremisesService;
-import pl.wroblewski.simplyaccounting.validation.CreateInfo;
-import pl.wroblewski.simplyaccounting.validation.EditInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.CreateInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.EditInfo;
 
 @RestController
 @RequestMapping("/premises")

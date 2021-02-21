@@ -23,6 +23,7 @@
 		<spring-orm.version>5.2.7.RELEASE</spring-orm.version>
 		<mysql-connector-java.version>8.0.21</mysql-connector-java.version>
 		<modelmapper.version>2.3.8</modelmapper.version>
+		<jackson-datatype-jsr310.version>2.12.1</jackson-datatype-jsr310.version>
 		<db.url>jdbc:mysql://localhost:3306/SimplyAccounting?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</db.url>
 		<db.user>root</db.user>
 		<db.password>fc15f3c9</db.password>
@@ -113,6 +114,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>${jackson-datatype-jsr310.version}</version>
 		</dependency>
 
 	</dependencies>

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.wroblewski.simplyaccounting.models.dtos.CooperativeDto;
 import pl.wroblewski.simplyaccounting.models.responses.CooperativeResponse;
 import pl.wroblewski.simplyaccounting.services.CooperativeService;
-import pl.wroblewski.simplyaccounting.validation.CreateCooperativeInfo;
-import pl.wroblewski.simplyaccounting.validation.EditCooperativeInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.CreateCooperativeInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.EditCooperativeInfo;
 
 @RestController
 @AllArgsConstructor

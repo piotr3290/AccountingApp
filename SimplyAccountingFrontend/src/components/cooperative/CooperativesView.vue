@@ -1,7 +1,7 @@
 <template>
   <div class="cooperatives-view">
     <h1>COOPERATIVES</h1>
-    <b-button @click="createCooperative">Create</b-button>
+    <b-button @click="createCooperative">{{$_.capitalize($t('common.add'))}}</b-button>
     <ul v-if="isAnyElement">
       <li v-for="item in cooperatives" :key="item.id" @click="cooperativeDetails(item.id)">
         {{ item.name }}

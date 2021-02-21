@@ -4,13 +4,13 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @DynamicUpdate
 @Table(name = "areas", schema = "simplyaccounting")
@@ -23,11 +23,11 @@ public class AreaEntity {
 
     @Basic
     @Column(name = "start_date", nullable = true)
-    private Date startDate;
+    private LocalDate startDate;
 
     @Basic
     @Column(name = "end_date", nullable = true)
-    private Date endDate;
+    private LocalDate endDate;
 
     @Basic
     @Column(name = "value", nullable = false, precision = 0)

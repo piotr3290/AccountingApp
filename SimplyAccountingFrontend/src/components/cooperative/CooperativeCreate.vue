@@ -26,12 +26,12 @@
           </validation-provider>
 
           <validation-provider
-              :name="$t('cooperative.nip')"
+              :name="$t('common.nip')"
               :rules="{regex: /^[0-9]+$/, max: 10}"
               v-slot="validationContext">
             <b-form-group
                 id="input-group-nip"
-                :label="$t('cooperative.nip')"
+                :label="$t('common.nip')"
                 label-for="input-nip">
               <b-form-input
                   id="input-nip"
@@ -152,7 +152,8 @@
           </validation-provider>
 
           <b-button type="submit">{{ createOrEdit }}</b-button>
-          <b-button @click="$router.push('/cooperatives')">{{ $_.capitalize($t('common.cancel')) }}</b-button>
+          <b-button @click="cancelForm">{{ $_.capitalize($t('common.cancel')) }}</b-button>
+
         </b-form>
       </validation-observer>
     </div>
@@ -171,7 +172,7 @@ export default {
   data() {
     return {
       cooperative: {
-        id: Number,
+        id: null,
         name: null,
         nip: null,
         regon: null,
@@ -267,6 +268,13 @@ export default {
           .finally(() => {
             this.$store.commit('switchOffLoading');
           });
+    },
+    cancelForm() {
+      if (this.cooperative.id != null) {
+        this.$router.push({name: 'cooperative', params: {id: this.cooperative.id}});
+      } else {
+        this.$router.push({name: 'cooperatives'});
+      }
     }
   },
   watch: {

@@ -5,10 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.wroblewski.simplyaccounting.models.dtos.LandlordDto;
+import pl.wroblewski.simplyaccounting.models.responses.LandlordDetailsResponse;
 import pl.wroblewski.simplyaccounting.models.responses.LandlordResponse;
 import pl.wroblewski.simplyaccounting.services.LandlordService;
-import pl.wroblewski.simplyaccounting.validation.CreateInfo;
-import pl.wroblewski.simplyaccounting.validation.EditInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.CreateInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.EditInfo;
 
 import java.util.List;
 
@@ -32,5 +33,15 @@ public class LandlordController {
     @PutMapping
     public ResponseEntity<LandlordDto> updateLandlord(@RequestBody @Validated(EditInfo.class) LandlordDto landlord) {
         return ResponseEntity.ok(landlordService.updateLandlord(landlord));
+    }
+
+    @GetMapping(path = "/details/{id}")
+    public ResponseEntity<LandlordDetailsResponse> getLandlordDetails(@PathVariable int id) {
+        return ResponseEntity.ok(landlordService.getLandlordDetails(id));
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<LandlordDto> getLandlord(@PathVariable int id) {
+        return ResponseEntity.ok(landlordService.getLandlord(id));
     }
 }

@@ -4,6 +4,7 @@
       <h2>{{ premises.premisesNumber }}</h2>
       <h2>{{ premises.premisesTypeName }}</h2>
       <b-button @click="editPremises">{{ $_.capitalize($t('common.edit')) }}</b-button>
+      <areas-list :areas="premises.areas" :premises-id="premises.id"/>
     </div>
     <div v-else>
       <h2>{{ $t('premises.messages.notFound') }}</h2>
@@ -13,16 +14,19 @@
 
 <script>
 import PremisesService from "@/core/service/PremisesService";
+import AreasList from "@/components/area/AreasList";
 
 export default {
   name: "PremisesView",
+  components: {AreasList},
   props: ['id'],
   data() {
     return {
       premises: {
         id: null,
         premisesNumber: null,
-        premisesTypeName: null
+        premisesTypeName: null,
+        areas: []
       }
     }
   },

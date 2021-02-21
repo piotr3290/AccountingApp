@@ -20,13 +20,15 @@
     "logout": "logout",
     "signIn": "sign in",
     "username": "username",
-    "password": "password"
+    "password": "password",
+    "nip": "NIP",
+    "from": "from",
+    "to": "to"
   },
   "cooperative": {
     "cooperative": "cooperative",
     "cooperatives": "cooperatives",
-    "name": "name",
-    "nip": "NIP",
+    "name": "cooperative name",
     "regon": "REGON",
     "messages": {
       "created": "Cooperative has been successfully created.",
@@ -57,7 +59,7 @@
       "chooseType": "Please choose premises type"
     }
   },
-  "landlords": {
+  "landlord": {
     "landlord": "landlord",
     "landlords": "landlords",
     "messages": {
@@ -65,6 +67,25 @@
       "edited": "Landlord's data have been successfully updated.",
       "notFound": "Landlords not found.",
       "noLandlords": "No landlord has been found."
+    }
+  },
+  "contractor": {
+    "contractor": "contractor",
+    "contractors": "contractors",
+    "name": "contractor name",
+    "messages": {
+      "created": "Contractor has been successfully created.",
+      "edited": "Contractor's data have been successfully updated.",
+      "notFound": "Contractors not found.",
+      "noContractors": "No contractor has been found."
+    }
+  },
+  "area": {
+    "surface": "surface",
+    "messages": {
+      "deleted": "The area was successfully deleted.",
+      "created": "The area has been successfully created.",
+      "edited": "The area's data have been successfully updated."
     }
   }
 }

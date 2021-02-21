@@ -1,4 +1,4 @@
-package pl.wroblewski.simplyaccounting.security;
+package pl.wroblewski.simplyaccounting.utils;
 
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;

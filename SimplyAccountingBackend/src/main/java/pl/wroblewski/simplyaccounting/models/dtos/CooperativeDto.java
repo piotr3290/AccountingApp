@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wroblewski.simplyaccounting.validation.CreateCooperativeInfo;
-import pl.wroblewski.simplyaccounting.validation.EditCooperativeInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.CreateCooperativeInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.EditCooperativeInfo;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;

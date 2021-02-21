@@ -12,11 +12,11 @@
         </li>
       </ul>
       <h2 v-else>{{ $t('cooperative.messages.noBuilding') }}</h2>
+      <b-button @click="createBuilding">{{ $_.capitalize($t('common.add')) }}</b-button>
     </div>
     <div v-else>
       {{ $t("cooperative.messages.notFound") }}
     </div>
-    <b-button @click="createBuilding">{{ $_.capitalize($t('common.add')) }}</b-button>
 
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       cooperative: {
-        id: Number,
+        id: null,
         name: String,
         buildings: []
       }

@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -24,7 +25,7 @@ public class AdvanceEntity {
 
     @Basic
     @Column(name = "realization_date", nullable = false)
-    private Date realizationDate;
+    private LocalDate realizationDate;
 
     @Basic
     @Column(name = "month", nullable = false)

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.wroblewski.simplyaccounting.models.dtos.BuildingDto;
 import pl.wroblewski.simplyaccounting.models.responses.BuildingResponse;
 import pl.wroblewski.simplyaccounting.services.BuildingService;
-import pl.wroblewski.simplyaccounting.validation.CreateBuildingInfo;
-import pl.wroblewski.simplyaccounting.validation.EditBuildingInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.CreateBuildingInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.EditBuildingInfo;
 
 @RestController
 @RequestMapping("/buildings")

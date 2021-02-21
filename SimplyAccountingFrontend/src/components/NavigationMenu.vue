@@ -4,10 +4,13 @@
     <b-navbar>
       <b-navbar-nav>
         <b-nav-item>
-          <router-link to="/cooperatives">{{ $_.capitalize($t('cooperative.cooperatives')) }}</router-link>
+          <router-link :to="{name: 'cooperatives'}">{{ $_.capitalize($t('cooperative.cooperatives')) }}</router-link>
         </b-nav-item>
         <b-nav-item>
-          <router-link to="/landlords">{{ $_.capitalize($t('landlords.landlords')) }}</router-link>
+          <router-link :to="{name: 'landlords'}">{{ $_.capitalize($t('landlord.landlord')) }}</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link :to="{name: 'contractors'}">{{ $_.capitalize($t('contractor.contractor')) }}</router-link>
         </b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">

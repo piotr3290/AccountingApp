@@ -20,13 +20,15 @@
     "logout": "wyloguj",
     "signIn": "zaloguj",
     "username": "nazwa użytkownika",
-    "password": "hasło"
+    "password": "hasło",
+    "nip": "NIP",
+    "from": "od",
+    "to": "do"
   },
   "cooperative": {
     "cooperative": "wspólnota",
     "cooperatives": "wspólnoty",
-    "name": "nazwa",
-    "nip": "NIP",
+    "name": "nazwa wspólnoty",
     "regon": "REGON",
     "messages": {
       "created": "Wpólnota została utworzona.",
@@ -57,7 +59,7 @@
       "chooseType": "Wybierz rodzaj lokalu"
     }
   },
-  "landlords": {
+  "landlord": {
     "landlord": "właścicel",
     "landlords": "właścicele",
     "messages": {
@@ -65,6 +67,25 @@
       "edited": "Dane właściciela zostały zmienione.",
       "notFound": "Nie znaleziono właściciela.",
       "noLandlords": "Nie znaleziono żadnego właściciela."
+    }
+  },
+  "contractor": {
+    "contractor": "kotrahent",
+    "contractors": "kotrahenci",
+    "name": "nazwa kontrahenta",
+    "messages": {
+      "created": "Kontrahent został utworzony.",
+      "edited": "Dane kontrahenta zostały zmienione.",
+      "notFound": "Nie znaleziono kontrahenta.",
+      "noContractors": "Nie znaleziono żadnego kontrahenta."
+    }
+  },
+  "area": {
+    "surface": "powierzchnia",
+    "messages": {
+      "deleted": "Powierzchnia została usunięta.",
+      "created": "Powierzchnia została dodana.",
+      "edited": "Dane powierzchni zostały zmienione."
     }
   }
 }

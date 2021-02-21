@@ -89,8 +89,9 @@
               </b-form-invalid-feedback>
             </b-form-group>
           </validation-provider>
+
           <b-button type="submit">{{ createOrEdit }}</b-button>
-          <b-button @click="$router.back()">{{ $_.capitalize($t('common.cancel')) }}</b-button>
+          <b-button @click="cancelForm">{{ $_.capitalize($t('common.cancel')) }}</b-button>
 
         </b-form>
       </validation-observer>
@@ -212,6 +213,15 @@ export default {
           .finally(() => {
             this.$store.commit('switchOffLoading');
           });
+    },
+    cancelForm() {
+      if (this.building.id != null) {
+        this.$router.push({name: 'building', params: {id: this.building.id}});
+      } else if (this.building.cooperativeId != null) {
+        this.$router.push({name: 'cooperative', params: {id: this.building.cooperativeId}});
+      } else {
+        this.$router.back();
+      }
     }
   },
   computed: {

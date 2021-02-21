@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -27,7 +28,7 @@ public class InvoiceEntity {
 
     @Basic
     @Column(name = "realization_date", nullable = false)
-    private Date realizationDate;
+    private LocalDate realizationDate;
 
     @ManyToOne
     @JoinColumn(name = "invoice_type_id", referencedColumnName = "id", nullable = false)

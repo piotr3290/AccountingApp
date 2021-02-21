@@ -195,10 +195,16 @@
             </b-form-group>
           </validation-provider>
 
+          <b-button type="submit">{{ createOrEdit }}</b-button>
+          <b-button @click="cancelForm">{{ $_.capitalize($t('common.cancel')) }}</b-button>
+
         </b-form>
 
       </validation-observer>
 
+    </div>
+    <div v-else>
+      {{ $t('landlord.messages.notFound') }}
     </div>
 
   </div>
@@ -261,7 +267,7 @@ export default {
       if (this.id == null) {
         LandlordService.createLandlord(landlord)
             .then(() => {
-              this.$root.$bvToast.toast(this.$t('landlords.messages.created'), {
+              this.$root.$bvToast.toast(this.$t('landlord.messages.created'), {
                 title: this.$_.capitalize(this.$t('common.success')),
                 toaster: 'b-toaster-top-center',
                 variant: 'success'
@@ -281,7 +287,7 @@ export default {
       } else {
         LandlordService.editLandlord(landlord)
             .then(response => {
-              this.$root.$bvToast.toast(this.$t('landlords.messages.edited'), {
+              this.$root.$bvToast.toast(this.$t('landlord.messages.edited'), {
                 title: this.$_.capitalize(this.$t('common.success')),
                 toaster: 'b-toaster-top-center',
                 variant: 'success'
@@ -299,12 +305,22 @@ export default {
               this.$store.commit('switchOffLoading');
             });
       }
+    },
+    cancelForm() {
+      if (this.landlord.id != null) {
+        this.$router.push({name: 'landlord', params: {id: this.landlord.id}});
+      } else {
+        this.$router.push({name: 'landlords'});
+      }
     }
   },
   computed: {
     isFormVisible() {
       return this.id == null || this.landlord.id != null;
-    }
+    },
+    createOrEdit() {
+      return this.id != null ? this.$_.capitalize(this.$t('common.edit')) : this.$_.capitalize(this.$t('common.create'));
+    },
   },
   mounted() {
     if (this.id != null) {

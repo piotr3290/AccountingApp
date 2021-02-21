@@ -26,6 +26,7 @@ public class PremisesEntity {
     private String premisesNumber;
 
     @OneToMany(mappedBy = "premises")
+    @OrderBy("startDate")
     private Collection<AreaEntity> areas;
 
     @OneToMany(mappedBy = "premises")

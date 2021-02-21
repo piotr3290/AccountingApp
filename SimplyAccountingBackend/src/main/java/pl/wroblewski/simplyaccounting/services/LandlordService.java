@@ -6,6 +6,7 @@ import pl.wroblewski.simplyaccounting.db.entities.LandlordEntity;
 import pl.wroblewski.simplyaccounting.db.repositories.LandlordRepository;
 import pl.wroblewski.simplyaccounting.exceptions.ObjectNotFoundException;
 import pl.wroblewski.simplyaccounting.models.dtos.LandlordDto;
+import pl.wroblewski.simplyaccounting.models.responses.LandlordDetailsResponse;
 import pl.wroblewski.simplyaccounting.models.responses.LandlordResponse;
 
 import java.util.List;
@@ -54,5 +55,13 @@ public class LandlordService {
     private LandlordEntity getLandlordEntity(int id) {
         return landlordRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Cannot find landlord."));
+    }
+
+    public LandlordDetailsResponse getLandlordDetails(int id) {
+        return converterService.landlordEntityToDetailsResponse(getLandlordEntity(id));
+    }
+
+    public LandlordDto getLandlord(int id) {
+        return converterService.landlordEntityToDto(getLandlordEntity(id));
     }
 }

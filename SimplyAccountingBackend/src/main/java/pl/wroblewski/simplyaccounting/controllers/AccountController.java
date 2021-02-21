@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.wroblewski.simplyaccounting.models.dtos.AccountDto;
 import pl.wroblewski.simplyaccounting.models.dtos.AccountTypeDto;
 import pl.wroblewski.simplyaccounting.services.AccountService;
-import pl.wroblewski.simplyaccounting.validation.CreateAccountInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.CreateAccountInfo;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class AccountController {
     @DeleteMapping(path = "/types/{id}")
     public ResponseEntity<String> deleteAccountType(@PathVariable int id) {
         accountService.deleteAccountTypeById(id);
-        return ResponseEntity.ok("Successfully deleted an object.");
+        return ResponseEntity.ok("Successfully deleted an account.");
     }
 
     @GetMapping

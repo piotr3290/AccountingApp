@@ -56,7 +56,7 @@
           </validation-provider>
 
           <b-button type="submit">{{ createOrEdit }}</b-button>
-          <b-button @click="$router.back()">{{ $_.capitalize($t('common.cancel')) }}</b-button>
+          <b-button @click="cancelForm">{{ $_.capitalize($t('common.cancel')) }}</b-button>
 
         </b-form>
       </validation-observer>
@@ -193,6 +193,15 @@ export default {
             .finally(() => {
               this.$store.commit('switchOffLoading');
             });
+      }
+    },
+    cancelForm() {
+      if (this.premises.id != null) {
+        this.$router.push({name: 'premises', params: {id: this.premises.id}});
+      } else if (this.premises.buildingId != null) {
+        this.$router.push({name: 'building', params: {id: this.premises.buildingId}});
+      } else {
+        this.$router.back();
       }
     }
   },

@@ -1,18 +1,18 @@
 export default class AuthorizationStorageService {
 
     static clearStorage() {
-        sessionStorage.clear();
+        localStorage.clear();
     }
 
     static isAuthorized() {
-        return sessionStorage.getItem('jwt') != null;
+        return localStorage.getItem('jwt') != null;
     }
 
     static saveTokenInStorage(jwt) {
-        sessionStorage.setItem('jwt', jwt);
+        localStorage.setItem('jwt', jwt);
     }
 
     static getTokenFromStorage() {
-        return sessionStorage.getItem('jwt');
+        return localStorage.getItem('jwt');
     }
 }

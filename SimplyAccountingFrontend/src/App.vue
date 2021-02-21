@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <loading v-if="showLoading"/>
-    <navigation-menu v-if="$store.getters.isAuthenticated"/>
+    <navigation-menu v-if="isAuthenticated"/>
     <router-view/>
   </div>
 </template>
@@ -22,6 +22,9 @@ export default {
   computed: {
     showLoading() {
       return this.$store.getters.getLoadingState;
+    },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
     }
   },
   created() {

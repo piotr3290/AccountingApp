@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @DynamicUpdate
 @Table(name = "contractors", schema = "simplyaccounting")

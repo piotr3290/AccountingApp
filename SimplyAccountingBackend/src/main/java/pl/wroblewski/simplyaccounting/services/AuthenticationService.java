@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import pl.wroblewski.simplyaccounting.models.requests.LoginRequest;
 import pl.wroblewski.simplyaccounting.models.responses.LoginResponse;
-import pl.wroblewski.simplyaccounting.security.JwtUtilsComponent;
+import pl.wroblewski.simplyaccounting.utils.JwtUtilsComponent;
 
 @Service
 @AllArgsConstructor
