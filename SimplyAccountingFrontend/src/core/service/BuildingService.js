@@ -16,4 +16,8 @@ export default class BuildingService {
     static getBuildingWithPremises(id) {
         return httpRequestService.get(`/buildings/premises/${id}`);
     }
+
+    static getAllBuildingsForCooperative(cooperativeId) {
+        return httpRequestService.get(`/buildings/cooperative/${cooperativeId}`);
+    }
 }

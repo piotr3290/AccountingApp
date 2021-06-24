@@ -13,12 +13,15 @@ export default class PremisesService {
         return httpRequestService.get(`/premises/${id}`);
     }
 
-    static getAllPremisesTypes() {
-        return httpRequestService.get('/premisesTypes');
-    }
-
     static getPremisesView(id) {
         return httpRequestService.get(`/premises/details/${id}`);
     }
 
+    static getAllPremisesForBuilding(buildingId) {
+        return httpRequestService.get(`/premises/building/${buildingId}`);
+    }
+
+    static getPremisesInfo(id) {
+        return httpRequestService.get(`/premises/info/${id}`);
+    }
 }

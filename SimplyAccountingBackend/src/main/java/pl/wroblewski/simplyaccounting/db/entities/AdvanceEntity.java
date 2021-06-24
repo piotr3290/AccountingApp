@@ -4,14 +4,13 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @DynamicUpdate
 @Table(name = "advances", schema = "simplyaccounting")
@@ -21,29 +20,34 @@ public class AdvanceEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
+
+    @Basic
+    @Column(name = "amount", nullable = false)
+    private Double amount;
 
     @Basic
     @Column(name = "realization_date", nullable = false)
-    private LocalDate realizationDate;
+    @Builder.Default
+    private LocalDate realizationDate = LocalDate.now();
 
     @Basic
     @Column(name = "month", nullable = false)
-    private byte month;
+    private Byte month;
 
     @Basic
     @Column(name = "year", nullable = false)
-    private short year;
+    private Short year;
 
-    @ManyToOne
-    @JoinColumn(name = "cooperative_id", referencedColumnName = "id", nullable = false)
-    private CooperativeEntity cooperative;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "premises_id", referencedColumnName = "id", nullable = false)
+    private PremisesEntity premises;
 
-    @ManyToOne
-    @JoinColumn(name = "advance_type_id", referencedColumnName = "id", nullable = false)
-    private AdvanceTypeEntity advanceType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "charge_type_id", referencedColumnName = "id", nullable = false)
+    private ChargeTypeEntity chargeType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "landlord_id", referencedColumnName = "id", nullable = false)
     private LandlordEntity landlord;
 

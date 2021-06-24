@@ -10,6 +10,8 @@ import pl.wroblewski.simplyaccounting.services.BuildingService;
 import pl.wroblewski.simplyaccounting.validation.groups.CreateBuildingInfo;
 import pl.wroblewski.simplyaccounting.validation.groups.EditBuildingInfo;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/buildings")
 @AllArgsConstructor
@@ -17,22 +19,29 @@ public class BuildingController {
     private final BuildingService buildingService;
 
     @PostMapping
-    public ResponseEntity<BuildingDto> createBuilding(@Validated(CreateBuildingInfo.class) @RequestBody BuildingDto building) {
+    public ResponseEntity<BuildingDto> createBuilding(
+            @Validated(CreateBuildingInfo.class) @RequestBody BuildingDto building) {
         return ResponseEntity.ok(buildingService.createBuilding(building));
     }
 
     @PutMapping
-    public ResponseEntity<BuildingDto> updateBuilding(@Validated(EditBuildingInfo.class) @RequestBody BuildingDto building){
+    public ResponseEntity<BuildingDto> updateBuilding(
+            @Validated(EditBuildingInfo.class) @RequestBody BuildingDto building) {
         return ResponseEntity.ok(buildingService.updateBuilding(building));
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<BuildingDto> getBuilding(@PathVariable int id){
+    public ResponseEntity<BuildingDto> getBuilding(@PathVariable int id) {
         return ResponseEntity.ok(buildingService.getBuilding(id));
     }
 
     @GetMapping(path = "/premises/{id}")
-    public ResponseEntity<BuildingResponse> getBuildingWithPremises(@PathVariable int id){
+    public ResponseEntity<BuildingResponse> getBuildingWithPremises(@PathVariable int id) {
         return ResponseEntity.ok(buildingService.getBuildingWithPremises(id));
+    }
+
+    @GetMapping(path = "/cooperative/{id}")
+    public ResponseEntity<List<BuildingDto>> getAllBuildingsForCooperative(@PathVariable Integer id) {
+        return ResponseEntity.ok(buildingService.getAllBuildingsForCooperative(id));
     }
 }

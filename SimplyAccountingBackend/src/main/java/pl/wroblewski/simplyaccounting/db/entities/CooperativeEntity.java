@@ -5,6 +5,9 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @Entity
@@ -19,7 +22,7 @@ public class CooperativeEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 255)
@@ -50,15 +53,12 @@ public class CooperativeEntity {
     private String postalCode;
 
     @OneToMany(mappedBy = "cooperative")
-    private Collection<AdvanceEntity> advances;
-
-    @OneToMany(mappedBy = "cooperative")
     private Collection<BuildingEntity> buildings;
 
     @OneToMany(mappedBy = "cooperative")
     private Collection<ContractorPaymentEntity> contractorsPayments;
 
-    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
     private AccountEntity account;
 
@@ -66,9 +66,19 @@ public class CooperativeEntity {
     private Collection<InvoiceEntity> invoices;
 
     @OneToMany(mappedBy = "cooperative")
-    private Collection<LandlordPaymentEntity> landlordsPayments;
+    private Collection<RateEntity> rates;
 
     @OneToMany(mappedBy = "cooperative")
-    private Collection<RateEntity> rates;
+    private Collection<ChargeElementEntity> chargeElements;
+
+    @OneToMany(mappedBy = "cooperative")
+    private Collection<OpeningBalanceEntity> openingBalances;
+
+    public String getAddress() {
+        return Stream
+                .of(street, houseNumber, postalCode, city)
+                .filter(Objects::nonNull)
+                .collect(Collectors.joining(" "));
+    }
 
 }

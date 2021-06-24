@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wroblewski.simplyaccounting.models.dtos.AreaDto;
+import pl.wroblewski.simplyaccounting.models.dtos.PeopleNumberDto;
 
 import java.util.List;
 
@@ -13,8 +13,24 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class PremisesResponse {
-    private int id;
+
+    private Integer id;
+
     private String premisesNumber;
+
     private String premisesTypeName;
-    private List<AreaDto> areas;
+
+    private Integer buildingId;
+
+    private String buildingAddress;
+
+    private String cooperativeName;
+
+    private List<AreaResponse> areas;
+
+    private List<PeopleNumberDto> peopleNumbers;
+
+    private List<PremisesLandlordResponse> premisesLandlords;
+
+    private List<ConsumptionResponse> consumptions;
 }

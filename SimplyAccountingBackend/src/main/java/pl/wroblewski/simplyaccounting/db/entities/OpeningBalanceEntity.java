@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @DynamicUpdate
 @Table(name = "opening_balances", schema = "simplyaccounting")
@@ -19,18 +19,22 @@ public class OpeningBalanceEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "year", nullable = false)
-    private byte year;
+    private Short year;
 
     @Basic
     @Column(name = "balance", nullable = false, precision = 0)
-    private double balance;
+    private Double balance;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
     private AccountEntity account;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cooperative_id", referencedColumnName = "id", nullable = false)
+    private CooperativeEntity cooperative;
 
 }

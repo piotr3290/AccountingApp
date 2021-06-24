@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @DynamicUpdate
 @Table(name = "premises_types", schema = "simplyaccounting")
@@ -19,7 +19,7 @@ public class PremisesTypeEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 64)
@@ -27,5 +27,8 @@ public class PremisesTypeEntity {
 
     @OneToMany(mappedBy = "premisesType")
     private Collection<PremisesEntity> premises;
+
+    @OneToMany(mappedBy = "premisesType")
+    private Collection<ChargeElementEntity> chargeElements;
 
 }

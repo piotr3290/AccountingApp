@@ -18,7 +18,7 @@ public class UserEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "username", nullable = false, length = 255, unique = true)

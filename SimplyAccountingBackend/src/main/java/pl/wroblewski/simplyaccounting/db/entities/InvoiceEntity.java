@@ -4,14 +4,13 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @DynamicUpdate
 @Table(name = "invoices", schema = "simplyaccounting")
@@ -20,25 +19,25 @@ public class InvoiceEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
-    @Column(name = "amount", nullable = false, precision = 0)
-    private double amount;
+    @Column(name = "value", nullable = false, precision = 0)
+    private Double value;
 
     @Basic
     @Column(name = "realization_date", nullable = false)
     private LocalDate realizationDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoice_type_id", referencedColumnName = "id", nullable = false)
     private InvoiceTypeEntity invoiceType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cooperative_id", referencedColumnName = "id", nullable = false)
     private CooperativeEntity cooperative;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contractor_id", referencedColumnName = "id", nullable = false)
     private ContractorEntity contractor;
 

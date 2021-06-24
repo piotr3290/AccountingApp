@@ -3,15 +3,15 @@ import {httpRequestService} from "@/App";
 export default class LandlordService {
 
     static createLandlord(landlord) {
-        return httpRequestService.post('/landlord', landlord);
+        return httpRequestService.post('/landlords', landlord);
     }
 
     static editLandlord(landlord) {
-        return httpRequestService.put('/landlord', landlord);
+        return httpRequestService.put('/landlords', landlord);
     }
 
     static getAllLandlords() {
-        return httpRequestService.get('/landlord');
+        return httpRequestService.get('/landlords');
     }
 
     static getLandlord(id) {
@@ -20,5 +20,13 @@ export default class LandlordService {
 
     static getLandlordDetails(id) {
         return httpRequestService.get(`/landlords/details/${id}`);
+    }
+
+    static getAllLandlordsForCooperative(cooperativeId) {
+        return httpRequestService.get(`/landlords/cooperative/${cooperativeId}`);
+    }
+
+    static getAllLandlordsForPremises(premisesId) {
+        return httpRequestService.get(`/landlords/premises/${premisesId}`);
     }
 }

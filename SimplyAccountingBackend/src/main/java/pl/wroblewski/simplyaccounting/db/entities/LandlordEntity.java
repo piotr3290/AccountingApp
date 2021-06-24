@@ -4,9 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,7 +22,7 @@ public class LandlordEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "first_name", nullable = true, length = 64)
@@ -58,10 +57,6 @@ public class LandlordEntity {
     private String postalCode;
 
     @Basic
-    @Column(name = "pesel", nullable = true, length = 11)
-    private String pesel;
-
-    @Basic
     @Column(name = "phone_number", nullable = true, length = 15)
     private String phoneNumber;
 
@@ -70,17 +65,20 @@ public class LandlordEntity {
     private String emailAddress;
 
     @OneToMany(mappedBy = "landlord")
-    private Collection<AdvanceEntity> advances;
+    @OrderBy("realizationDate")
+    private List<AdvanceEntity> advances;
 
-    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
     private AccountEntity account;
 
     @OneToMany(mappedBy = "landlord")
-    private Collection<LandlordPaymentEntity> landlordsPayments;
+    @OrderBy("realizationDate")
+    private List<LandlordPaymentEntity> landlordsPayments;
 
     @OneToMany(mappedBy = "landlord")
-    private Collection<PremisesLandlordEntity> premisesLandlords;
+    @OrderBy("startDate")
+    private List<PremisesLandlordEntity> premisesLandlords;
 
     public String getAddress() {
         return Stream

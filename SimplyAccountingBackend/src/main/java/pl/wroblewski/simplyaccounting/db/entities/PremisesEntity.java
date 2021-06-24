@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,7 +20,7 @@ public class PremisesEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "premises_number", nullable = false, length = 8)
@@ -27,26 +28,38 @@ public class PremisesEntity {
 
     @OneToMany(mappedBy = "premises")
     @OrderBy("startDate")
-    private Collection<AreaEntity> areas;
+    private List<AreaEntity> areas;
 
     @OneToMany(mappedBy = "premises")
-    private Collection<ConsumptionEntity> consumptions;
+    @OrderBy("startDate")
+    private List<ConsumptionEntity> consumptions;
 
     @OneToMany(mappedBy = "premises")
-    private Collection<PeopleNumberEntity> peopleNumbers;
+    @OrderBy("startDate")
+    private List<PeopleNumberEntity> peopleNumbers;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id", referencedColumnName = "id", nullable = false)
     private BuildingEntity building;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "premises_type_id", referencedColumnName = "id", nullable = false)
     private PremisesTypeEntity premisesType;
 
     @OneToMany(mappedBy = "premises")
-    private Collection<PremisesLandlordEntity> premisesLandlords;
+    @OrderBy("startDate")
+    private List<PremisesLandlordEntity> premisesLandlords;
 
     @OneToMany(mappedBy = "premises")
-    private Collection<RateEntity> rates;
+    @OrderBy("startDate")
+    private List<RateEntity> rates;
+
+    @OneToMany(mappedBy = "premises")
+    @OrderBy("realizationDate")
+    private List<LandlordPaymentEntity> landlordPayments;
+
+    @OneToMany(mappedBy = "premises")
+    @OrderBy("realizationDate")
+    private Collection<AdvanceEntity> advances;
 
 }

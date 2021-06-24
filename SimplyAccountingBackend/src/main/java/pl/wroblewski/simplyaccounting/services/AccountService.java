@@ -5,12 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.wroblewski.simplyaccounting.db.entities.AccountEntity;
+import pl.wroblewski.simplyaccounting.db.entities.AccountTypeEntity;
 import pl.wroblewski.simplyaccounting.db.repositories.AccountRepository;
 import pl.wroblewski.simplyaccounting.db.repositories.AccountTypeRepository;
 import pl.wroblewski.simplyaccounting.exceptions.ObjectNotFoundException;
 import pl.wroblewski.simplyaccounting.exceptions.ObjectReferenceException;
 import pl.wroblewski.simplyaccounting.models.dtos.AccountDto;
 import pl.wroblewski.simplyaccounting.models.dtos.AccountTypeDto;
+import pl.wroblewski.simplyaccounting.models.responses.AccountResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +20,10 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class AccountService {
+
+    private final int COOPERATIVE_ACCOUNT_TYPE_ID = 1;
+    private final int LANDLORD_ACCOUNT_TYPE_ID = 2;
+    private final int CONTRACTOR_ACCOUNT_TYPE_ID = 3;
     private final AccountTypeRepository accountTypeRepository;
     private final AccountRepository accountRepository;
     private final ConverterService converterService;
@@ -29,8 +35,12 @@ public class AccountService {
     }
 
     public AccountTypeDto getAccountType(int id) {
-        return converterService.accountTypeEntityToDto(accountTypeRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Cannot find account type.")));
+        return converterService.accountTypeEntityToDto(getAccountTypeEntity(id));
+    }
+
+    AccountTypeEntity getAccountTypeEntity(Integer id) {
+        return accountTypeRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Cannot find account type."));
     }
 
     public Page<AccountDto> getAllAccounts(int pageNumber, int itemsPerPage) {
@@ -39,8 +49,16 @@ public class AccountService {
     }
 
     public AccountDto getAccount(int id) {
-        return converterService.accountEntityToDto(accountRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Cannot find account.")));
+        return converterService.accountEntityToDto(getAccountEntity(id));
+    }
+
+    public void checkAccountExists(int id) {
+        getAccountEntity(id);
+    }
+
+    private AccountEntity getAccountEntity(int id) {
+        return accountRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Cannot find account."));
     }
 
     public void deleteAccountById(int id) {
@@ -73,5 +91,42 @@ public class AccountService {
                 .builder()
                 .accountType(accountType.get())
                 .build());
+    }
+
+    public AccountEntity createCooperativeAccount() {
+        return createAccount(COOPERATIVE_ACCOUNT_TYPE_ID);
+    }
+
+    public AccountEntity createLandlordAccount() {
+        return createAccount(LANDLORD_ACCOUNT_TYPE_ID);
+    }
+
+    public AccountEntity createContractorAccount() {
+        return createAccount(CONTRACTOR_ACCOUNT_TYPE_ID);
+    }
+
+    public AccountTypeDto getCooperativeAccountType() {
+        return getAccountType(COOPERATIVE_ACCOUNT_TYPE_ID);
+    }
+
+    public AccountTypeDto getLandlordAccountType() {
+        return getAccountType(LANDLORD_ACCOUNT_TYPE_ID);
+    }
+
+    public AccountTypeDto getContractorAccountType() {
+        return getAccountType(CONTRACTOR_ACCOUNT_TYPE_ID);
+    }
+
+    public AccountTypeDto editAccountType(AccountTypeDto accountType) {
+        var accountTypeEntity = getAccountTypeEntity(accountType.getId())
+                .toBuilder()
+                .name(accountType.getName())
+                .number(accountType.getNumber())
+                .build();
+        return converterService.accountTypeEntityToDto(accountTypeRepository.save(accountTypeEntity));
+    }
+
+    public AccountResponse getAccountResponse(Integer id) {
+        return converterService.accountEntityToResponse(getAccountEntity(id));
     }
 }

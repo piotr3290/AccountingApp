@@ -8,6 +8,9 @@ import pl.wroblewski.simplyaccounting.exceptions.ObjectNotFoundException;
 import pl.wroblewski.simplyaccounting.models.dtos.BuildingDto;
 import pl.wroblewski.simplyaccounting.models.responses.BuildingResponse;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class BuildingService {
@@ -17,7 +20,7 @@ public class BuildingService {
     private final ConverterService converterService;
 
     public BuildingDto createBuilding(BuildingDto buildingDto) {
-        cooperativeService.getCooperativeEntity(buildingDto.getCooperativeId());
+        cooperativeService.checkCooperativeExists(buildingDto.getCooperativeId());
         return converterService.buildingEntityToDto(buildingRepository.save(converterService.buildingDtoToEntity(buildingDto)));
     }
 
@@ -32,7 +35,7 @@ public class BuildingService {
                         .build()));
     }
 
-    BuildingEntity getBuildingEntity(int id) {
+    private BuildingEntity getBuildingEntity(int id) {
         return buildingRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Cannot find building."));
     }
@@ -43,5 +46,16 @@ public class BuildingService {
 
     public BuildingResponse getBuildingWithPremises(int id) {
         return converterService.buildingEntityToResponse(getBuildingEntity(id));
+    }
+
+    public void checkBuildingExists(Integer buildingId) {
+        getBuildingEntity(buildingId);
+    }
+
+    public List<BuildingDto> getAllBuildingsForCooperative(Integer id) {
+        return buildingRepository.findAllByCooperative_IdOrderByHouseNumber(id)
+                .stream()
+                .map(converterService::buildingEntityToDto)
+                .collect(Collectors.toList());
     }
 }

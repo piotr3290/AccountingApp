@@ -8,6 +8,7 @@ import pl.wroblewski.simplyaccounting.validation.groups.CreateBuildingInfo;
 import pl.wroblewski.simplyaccounting.validation.groups.EditBuildingInfo;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Data
@@ -16,8 +17,9 @@ import javax.validation.constraints.Positive;
 @Builder
 public class BuildingDto {
 
+    @NotNull(groups = {EditBuildingInfo.class})
     @Positive(groups = {EditBuildingInfo.class})
-    private int id;
+    private Integer id;
 
     @NotBlank(groups = {EditBuildingInfo.class, CreateBuildingInfo.class})
     private String street;
@@ -31,8 +33,9 @@ public class BuildingDto {
     @NotBlank(groups = {EditBuildingInfo.class, CreateBuildingInfo.class})
     private String city;
 
+    @NotNull(groups = {CreateBuildingInfo.class})
     @Positive(groups = {CreateBuildingInfo.class})
-    private int cooperativeId;
+    private Integer cooperativeId;
 
     private String cooperativeName;
 }

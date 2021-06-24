@@ -4,7 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,7 +19,7 @@ public class ContractorEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 64)
@@ -29,14 +29,16 @@ public class ContractorEntity {
     @Column(name = "nip", nullable = true, length = 10)
     private String nip;
 
-    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
     private AccountEntity account;
 
     @OneToMany(mappedBy = "contractor")
-    private Collection<ContractorPaymentEntity> contractorsPayments;
+    @OrderBy("realizationDate")
+    private List<ContractorPaymentEntity> contractorsPayments;
 
     @OneToMany(mappedBy = "contractor")
-    private Collection<InvoiceEntity> invoices;
+    @OrderBy("realizationDate")
+    private List<InvoiceEntity> invoices;
 
 }

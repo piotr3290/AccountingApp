@@ -1,22 +1,74 @@
 <template>
-  <div>
-    <div v-if="isLandlordFound">
-      <h2>{{ landlord.fullName }}</h2>
-      <h2>{{ landlord.address }}</h2>
-      <h2>{{ landlord.phoneNumber + ' ' + landlord.addressEmail }}</h2>
-      <b-button @click="editLandlord">{{ $_.capitalize($t('common.edit')) }}</b-button>
-    </div>
-    <div v-else>
-      {{ $t("landlord.messages.notFound") }}
-    </div>
-  </div>
+  <v-card class="landlord-view">
+    <template v-if="isLandlordFound">
+
+      <v-card-title class="position-relative">
+        <div class="mr-8">
+          {{ landlord.fullName }}
+          <edit-button
+              class="mx-2"
+              @click="editLandlord"/>
+        </div>
+        <v-menu
+            left
+            bottom>
+          <template #activator="{ on, attrs }">
+            <v-btn
+                class="menu-button mr-2 mt-4 mr-sm-4"
+                v-bind="attrs"
+                v-on="on"
+                :icon="isSmall"
+                :outlined="!isSmall">
+              <v-icon v-if="isSmall">
+                mdi-dots-vertical
+              </v-icon>
+              <template v-if="!isSmall">
+                options
+              </template>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+                v-for="(option, index) in menuOptions"
+                :key="index"
+                @click="option.onClickFunction">
+              <v-list-item-title>
+                {{ option.text }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-card-title>
+
+      <v-card-subtitle class="py-0">
+        {{ landlord.address }}
+      </v-card-subtitle>
+
+      <v-card-subtitle class="pt-0">
+        {{ landlord.phoneNumber + ' ' + landlord.addressEmail }}
+      </v-card-subtitle>
+
+      <v-divider/>
+
+
+    </template>
+
+    <template v-else>
+      <v-card-title class="error">
+        {{ $t("landlord.messages.notFound") }}
+      </v-card-title>
+    </template>
+
+  </v-card>
 </template>
 
 <script>
 import LandlordService from "@/core/service/LandlordService";
+import EditButton from "@/components/common/buttons/EditButton";
 
 export default {
   name: "LandlordView",
+  components: {EditButton},
   props: ['id'],
   data() {
     return {
@@ -25,36 +77,62 @@ export default {
         fullName: null,
         address: null,
         phoneNumber: null,
-        addressEmail: null
+        addressEmail: null,
+        accountId: null
       }
     }
   },
   methods: {
     loadLandlord() {
-      this.$store.commit('switchOnLoading');
-      LandlordService.getLandlordDetails(this.id)
+      this.$loadingPromises([this.loadLandlordRequest()]);
+    },
+    loadLandlordRequest() {
+      return LandlordService.getLandlordDetails(this.id)
           .then(response => {
             this.landlord = response.data;
           })
           .catch(error => {
             this.landlord.id = null;
-            this.$root.$bvToast.toast(error.response.data, {
-              title: error.message,
-              toaster: 'b-toaster-top-center',
-              variant: 'danger'
-            });
-          })
-          .finally(() => {
-            this.$store.commit('switchOffLoading');
+            this.$errorToast(error);
           });
     },
     editLandlord() {
       this.$router.push({name: 'landlordEdit', params: {id: this.landlord.id}});
+    },
+    goToOpeningBalances() {
+      this.$router.push({
+        name: 'openingBalancesList',
+        params: {accountId: this.landlord.accountId}
+      });
+    },
+    goToLandlords() {
+      this.$router.push({
+        name: 'landlords'
+      });
     }
   },
   computed: {
     isLandlordFound() {
       return this.landlord.id != null;
+    },
+    isSmall() {
+      return this.$vssWidth <= 600;
+    },
+    menuOptions() {
+      return [
+        {
+          text: this.$_.capitalize(this.$t('common.edit')),
+          onClickFunction: this.editLandlord
+        },
+        {
+          text: this.$_.capitalize(this.$t('openingBalance.openingBalances')),
+          onClickFunction: this.goToOpeningBalances
+        },
+        {
+          text: this.$_.capitalize(this.$t('landlord.landlords')),
+          onClickFunction: this.goToLandlords
+        },
+      ];
     }
   },
   mounted() {

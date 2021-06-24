@@ -1,15 +1,19 @@
 <template>
-  <div id="app">
-    <loading v-if="showLoading"/>
+  <v-app>
     <navigation-menu v-if="isAuthenticated"/>
-    <router-view/>
-  </div>
+    <v-main class="mt-4">
+      <loading v-if="showLoading"/>
+      <v-container>
+        <router-view/>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import NavigationMenu from "@/components/NavigationMenu";
+import NavigationMenu from "@/components/menu/NavigationMenu";
 import HttpRequestService from "@/core/service/HttpRequestService";
-import Loading from "@/components/Loading";
+import Loading from "@/components/common/Loading";
 
 export const httpRequestService = new HttpRequestService('http://localhost:9090');
 
@@ -26,20 +30,11 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     }
-  },
-  created() {
-    this.$store.commit('loadJwtFromStorage');
   }
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

@@ -13,7 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class CooperativeResponse {
-    private int id;
+    private Integer id;
     private String name;
+    private Integer accountId;
     private List<BuildingDto> buildings;
+    private String address;
+    private String nip;
+    private String regon;
 }

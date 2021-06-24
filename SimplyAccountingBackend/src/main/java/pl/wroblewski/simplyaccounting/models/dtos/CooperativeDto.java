@@ -4,10 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wroblewski.simplyaccounting.validation.groups.CreateCooperativeInfo;
-import pl.wroblewski.simplyaccounting.validation.groups.EditCooperativeInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.CreateInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.EditInfo;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Data
@@ -16,10 +17,11 @@ import javax.validation.constraints.Positive;
 @Builder
 public class CooperativeDto {
 
-    @Positive(groups = {EditCooperativeInfo.class})
-    private int id;
+    @NotNull(groups = {EditInfo.class})
+    @Positive(groups = {EditInfo.class})
+    private Integer id;
 
-    @NotBlank(groups = {CreateCooperativeInfo.class, EditCooperativeInfo.class})
+    @NotBlank(groups = {CreateInfo.class, EditInfo.class})
     private String name;
 
     private String nip;
@@ -34,5 +36,5 @@ public class CooperativeDto {
 
     private String postalCode;
 
-    private AccountDto account;
+    private Integer accountId;
 }

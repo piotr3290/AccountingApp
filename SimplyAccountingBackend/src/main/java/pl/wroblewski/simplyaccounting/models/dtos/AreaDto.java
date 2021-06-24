@@ -1,28 +1,46 @@
 package pl.wroblewski.simplyaccounting.models.dtos;
 
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import pl.wroblewski.simplyaccounting.interfaces.IDatePeriod;
 import pl.wroblewski.simplyaccounting.validation.annotations.ConsistentDates;
 import pl.wroblewski.simplyaccounting.validation.groups.CreateInfo;
 import pl.wroblewski.simplyaccounting.validation.groups.EditInfo;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
+import java.time.LocalDate;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
+@Builder
 @ConsistentDates(groups = {CreateInfo.class, EditInfo.class})
-public class AreaDto extends DatesDto{
+public class AreaDto implements IDatePeriod {
 
+    @NotNull(groups = {EditInfo.class})
     @Positive(groups = {EditInfo.class})
-    private int id;
+    private Integer id;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
+
+    @NotNull(groups = {CreateInfo.class, EditInfo.class})
     @PositiveOrZero(groups = {CreateInfo.class, EditInfo.class})
-    private double value;
+    private Double value;
 
+    @NotNull(groups = {CreateInfo.class})
     @Positive(groups = {CreateInfo.class})
-    private int premisesId;
+    private Integer premisesId;
+
+    @NotNull(groups = {CreateInfo.class})
+    @Positive(groups = {CreateInfo.class})
+    private Integer areaTypeId;
 }

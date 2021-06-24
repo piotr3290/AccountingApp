@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @DynamicUpdate
 @Table(name = "invoices_types", schema = "simplyaccounting")
@@ -19,11 +19,15 @@ public class InvoiceTypeEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 64)
     private String name;
+
+    @Basic
+    @Column(name = "number", nullable = false)
+    private Integer number;
 
     @OneToMany(mappedBy = "invoiceType")
     private Collection<InvoiceEntity> invoices;

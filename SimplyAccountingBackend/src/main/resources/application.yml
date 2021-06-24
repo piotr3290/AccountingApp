@@ -13,4 +13,4 @@ server:
 simplyaccounting:
   app:
     jwtSecret: secret
-    jwtExpiration: 3600000
+    jwtExpiration: 36000000

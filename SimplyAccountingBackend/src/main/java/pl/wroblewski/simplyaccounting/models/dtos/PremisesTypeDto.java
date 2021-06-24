@@ -8,6 +8,7 @@ import pl.wroblewski.simplyaccounting.validation.groups.CreateInfo;
 import pl.wroblewski.simplyaccounting.validation.groups.EditInfo;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Data
@@ -16,8 +17,9 @@ import javax.validation.constraints.Positive;
 @Builder
 public class PremisesTypeDto {
 
+    @NotNull(groups = {EditInfo.class})
     @Positive(groups = {EditInfo.class})
-    private int id;
+    private Integer id;
 
     @NotBlank(groups = {CreateInfo.class, EditInfo.class})
     private String name;

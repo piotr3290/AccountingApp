@@ -1,73 +1,132 @@
 <template>
-  <div>
-    <div v-if="isBuildingFound">
-      <h2>{{ building.address }}</h2>
-      <b-button @click="editBuilding">{{ $_.capitalize($t('common.edit')) }}</b-button>
+  <v-card class="building-view">
+    <v-card-text class="pa-0">
+      <v-data-table
+          v-if="isBuildingFound"
+          :headers="tableHeaders"
+          :items="building.premises"
+          :no-data-text="$t('building.messages.noPremises')"
+          hide-default-footer
+          multi-sort
+          @click:row="premisesDetails">
 
-      <ul v-if="isAnyPremises">
-        <li
-            v-for="premises in building.premises"
-            :key="premises.id"
-            @click="premisesDetails(premises.id)">
-          {{ premises.id }}
-        </li>
-      </ul>
-      <h2 v-else>{{ $t('building.messages.noPremises') }}</h2>
-    </div>
-    <div v-else>
-      {{ $t("building.messages.notFound") }}
-    </div>
-    <b-button @click="createPremises">{{ $_.capitalize($t('common.add')) }}</b-button>
-  </div>
+        <template #top>
+          <v-card-title>
+            {{ building.address }}
+            <edit-button
+                class="mx-2"
+                @click="editBuilding"/>
+            <v-spacer/>
+            <default-button
+                :text="building.cooperativeName"
+                @click="goToCooperative"/>
+          </v-card-title>
+          <v-divider/>
+        </template>
+
+        <template #footer>
+
+          <v-divider/>
+
+          <div class="text-center">
+            <add-button
+                class="my-2"
+                @click="createPremises"/>
+          </div>
+
+        </template>
+
+
+        <default-button
+            @click="createPremises"
+            :text="$_.capitalize($t('common.add'))"/>
+
+      </v-data-table>
+
+      <div v-else>
+        {{ $t("building.messages.notFound") }}
+      </div>
+
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
 import BuildingService from "@/core/service/BuildingService";
+import DefaultButton from "@/components/common/buttons/DefaultButton";
+import EditButton from "@/components/common/buttons/EditButton";
+import AddButton from "@/components/common/buttons/AddButton";
 
 export default {
   name: "BuildingView",
+  components: {AddButton, EditButton, DefaultButton},
   props: ['id'],
   data() {
     return {
       building: {
         id: null,
         address: String,
-        premises: []
+        premises: [],
+        cooperativeId: null,
+        cooperativeName: null
       }
     }
   },
   methods: {
     loadBuilding() {
-      this.$store.commit('switchOnLoading');
-      BuildingService.getBuildingWithPremises(this.id)
+      this.$loadingPromises([this.loadBuildingRequest()]);
+    },
+    loadBuildingRequest() {
+      return BuildingService.getBuildingWithPremises(this.id)
           .then(response => {
             this.building = response.data;
           })
           .catch(error => {
             this.building.id = null
-            this.$root.$bvToast.toast(error.response.data, {
-              title: error.message,
-              toaster: 'b-toaster-top-center',
-              variant: 'danger'
-            });
-          })
-          .finally(() => {
-            this.$store.commit('switchOffLoading');
+            this.$errorToast(error);
           });
     },
     editBuilding() {
-      this.$router.push({name: 'buildingEdit', params: {id: this.id}});
+      this.$router.push({
+        name: 'buildingEdit',
+        params: {id: this.id}
+      });
     },
     createPremises() {
-      this.$router.push({name: 'premisesCreate', params: {buildingId: this.building.id}});
+      this.$router.push({
+        name: 'premisesCreate',
+        params: {buildingId: this.building.id}
+      });
     },
-    premisesDetails(premisesId) {
-      this.$router.push({name: 'premises', params: {id: premisesId}});
+    premisesDetails(premises) {
+      this.$router.push({
+        name: 'premises',
+        params: {id: premises.id}
+      });
+    },
+    goToCooperative() {
+      this.$router.push({
+        name: 'cooperative',
+        params: {id: this.building.cooperativeId}
+      });
     }
   },
   computed: {
-    isAnyPremises() {
-      return this.building.premises.length > 0;
+    tableHeaders() {
+      return [
+        {
+          text: this.$_.capitalize(this.$t('common.premisesNumber')),
+          value: 'premisesNumber'
+        },
+        {
+          text: this.$_.capitalize(this.$t('premises.type')),
+          value: 'premisesTypeName'
+        },
+        {
+          text: this.$_.capitalize(this.$t('landlord.landlord')),
+          value: 'landlordName'
+        }
+      ];
     },
     isBuildingFound() {
       return this.building.id != null;
@@ -85,5 +144,9 @@ export default {
 </script>
 
 <style scoped>
+
+/deep/ tbody > tr {
+  cursor: pointer !important;
+}
 
 </style>

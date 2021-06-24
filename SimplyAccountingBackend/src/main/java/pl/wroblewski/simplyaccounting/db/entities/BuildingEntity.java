@@ -6,7 +6,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,7 +22,7 @@ public class BuildingEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "city", nullable = false, length = 64)
@@ -41,7 +40,7 @@ public class BuildingEntity {
     @Column(name = "postal_code", nullable = false, length = 6)
     private String postalCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cooperative_id", referencedColumnName = "id", nullable = false)
     private CooperativeEntity cooperative;
 
@@ -53,7 +52,7 @@ public class BuildingEntity {
 
     public String getAddress() {
         return Stream
-                .of(street, houseNumber, postalCode)
+                .of(street, houseNumber, postalCode, city)
                 .filter(Objects::nonNull)
                 .collect(Collectors.joining(" "));
     }

@@ -2,25 +2,25 @@ package pl.wroblewski.simplyaccounting.db.entities;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import pl.wroblewski.simplyaccounting.interfaces.IDatePeriod;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @DynamicUpdate
 @Table(name = "consumptions", schema = "simplyaccounting")
-public class ConsumptionEntity {
+public class ConsumptionEntity implements IDatePeriod {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "start_date", nullable = true)
@@ -32,13 +32,13 @@ public class ConsumptionEntity {
 
     @Basic
     @Column(name = "value", nullable = false, precision = 0)
-    private double value;
+    private Double value;
 
-    @ManyToOne
-    @JoinColumn(name = "advance_type_id", referencedColumnName = "id", nullable = false)
-    private AdvanceTypeEntity advanceType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "charge_type_id", referencedColumnName = "id", nullable = false)
+    private ChargeTypeEntity chargeType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "premises_id", referencedColumnName = "id", nullable = false)
     private PremisesEntity premises;
 

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.wroblewski.simplyaccounting.models.dtos.AreaDto;
+import pl.wroblewski.simplyaccounting.models.responses.AreaResponse;
 import pl.wroblewski.simplyaccounting.services.AreaService;
 import pl.wroblewski.simplyaccounting.validation.groups.CreateInfo;
 import pl.wroblewski.simplyaccounting.validation.groups.EditInfo;
@@ -19,12 +20,12 @@ public class AreaController {
     private final AreaService areaService;
 
     @PostMapping
-    public ResponseEntity<List<AreaDto>> addAreaToPremises(@RequestBody @Validated(CreateInfo.class) AreaDto area) {
+    public ResponseEntity<List<AreaResponse>> addAreaToPremises(@RequestBody @Validated(CreateInfo.class) AreaDto area) {
         return ResponseEntity.ok(areaService.addNewAreaToPremises(area));
     }
 
     @PutMapping
-    public ResponseEntity<List<AreaDto>> editArea(@RequestBody @Validated(EditInfo.class) AreaDto area) {
+    public ResponseEntity<List<AreaResponse>> editArea(@RequestBody @Validated(EditInfo.class) AreaDto area) {
         return ResponseEntity.ok(areaService.editArea(area));
     }
 

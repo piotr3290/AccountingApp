@@ -1,0 +1,34 @@
+$primary-light: #8A3CDB;
+$accent-light: #B2AFAF;
+$secondary-light: #DBDB3B;
+$success-light: #19E7A8;
+$info-light: #1664A1;
+$warning-light: #FFCB07;
+$error-light: #D61818;
+
+$primary-dark: #8A3CDB;
+$accent-dark: #B2AFAF;
+$secondary-dark: #DBDB3B;
+$success-dark: #19E7A8;
+$info-dark: #1664A1;
+$warning-dark: #FFCB07;
+$error-dark: #D61818;
+
+
+:export {
+  primaryLight: $primary-light;
+  accentLight: $accent-light;
+  secondaryLight: $secondary-light;
+  successLight: $success-light;
+  infoLight: $info-light;
+  warningLight: $warning-light;
+  errorLight: $error-light;
+
+  primaryDark: $primary-dark;
+  accentDark: $accent-dark;
+  secondaryDark: $secondary-dark;
+  successDark: $success-dark;
+  infoDark: $info-dark;
+  warningDark: $warning-dark;
+  errorDark: $error-dark;
+}

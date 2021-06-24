@@ -4,12 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.wroblewski.simplyaccounting.db.entities.AreaEntity;
 import pl.wroblewski.simplyaccounting.db.repositories.AreaRepository;
-import pl.wroblewski.simplyaccounting.exceptions.IncorrectDateException;
 import pl.wroblewski.simplyaccounting.exceptions.ObjectNotFoundException;
 import pl.wroblewski.simplyaccounting.models.dtos.AreaDto;
-import pl.wroblewski.simplyaccounting.utils.DateUtilsComponent;
+import pl.wroblewski.simplyaccounting.models.responses.AreaResponse;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,18 +19,25 @@ public class AreaService {
     private final AreaRepository areaRepository;
     private final PremisesService premisesService;
     private final ConverterService converterService;
-    private final DateUtilsComponent dateUtilsComponent;
+    private final DatePeriodService datePeriodService;
+    private final AreaTypeService areaTypeService;
 
-    public List<AreaDto> addNewAreaToPremises(AreaDto area) {
-        var premises = premisesService.getPremisesEntity(area.getPremisesId());
-        savePremisesAreas(new ArrayList<>(premises.getAreas()), converterService.areaDtoToEntity(area));
+    public List<AreaResponse> addNewAreaToPremises(AreaDto area) {
+        var areaTypeEntity = areaTypeService.getAreaTypeEntity(area.getAreaTypeId());
+
+        var areaEntity = converterService.areaDtoToEntity(area);
+        areaEntity.setAreaType(areaTypeEntity);
+
+        var premisesAreas = areaRepository.findAllByPremises_IdAndAreaType_IdOrderByStartDate(area.getPremisesId(), area.getAreaTypeId());
+        savePremisesAreas(premisesAreas, areaEntity);
+
         return areaRepository.findAllByPremises_IdOrderByStartDate(area.getPremisesId())
                 .stream()
-                .map(converterService::areaEntityToDto)
+                .map(converterService::areaEntityToResponse)
                 .collect(Collectors.toList());
     }
 
-    public List<AreaDto> editArea(AreaDto area) {
+    public List<AreaResponse> editArea(AreaDto area) {
         var areaEntity = getAreaEntity(area.getId())
                 .toBuilder()
                 .startDate(area.getStartDate())
@@ -39,19 +45,18 @@ public class AreaService {
                 .value(area.getValue())
                 .build();
 
-        var premisesAreas = areaRepository.findAllByPremises_IdOrderByStartDate(areaEntity.getPremises().getId());
+        var premisesAreas = areaRepository.findAllByPremises_IdAndAreaType_IdOrderByStartDate(area.getPremisesId(), area.getAreaTypeId());
         premisesAreas.remove(areaEntity);
         savePremisesAreas(premisesAreas, areaEntity);
 
         return areaRepository.findAllByPremises_IdOrderByStartDate(area.getPremisesId())
                 .stream()
-                .map(converterService::areaEntityToDto)
+                .map(converterService::areaEntityToResponse)
                 .collect(Collectors.toList());
     }
 
     public void deleteArea(int id) {
-        var area = getAreaEntity(id);
-        areaRepository.delete(area);
+        areaRepository.delete(getAreaEntity(id));
     }
 
     private AreaEntity getAreaEntity(int id) {
@@ -59,94 +64,8 @@ public class AreaService {
                 .orElseThrow(() -> new ObjectNotFoundException("Cannot find"));
     }
 
-    private void savePremisesAreas(List<AreaEntity> areaEntities, AreaEntity newArea) {
-
-        if (areaEntities.size() == 0) {
-            areaRepository.saveAndFlush(newArea);
-            return;
-        }
-
-        if (newArea.getStartDate() == null && newArea.getEndDate() == null) {
-            throw new IncorrectDateException("Incorrect dates");
-        }
-
-        if (newArea.getStartDate() == null) {
-
-            var earliestDateArea = findEarliestDateArea(areaEntities);
-
-            if (earliestDateArea.getEndDate() != null && !earliestDateArea.getEndDate().isAfter(newArea.getEndDate())) {
-                throw new IncorrectDateException("Incorrect dates.");
-            }
-
-            if (earliestDateArea.getStartDate() == null) {
-                earliestDateArea.setStartDate(newArea.getEndDate().plusDays(1));
-                areaRepository.saveAndFlush(earliestDateArea);
-            } else if (!earliestDateArea.getStartDate().isAfter(newArea.getEndDate())) {
-                throw new IncorrectDateException("Incorrect dates.");
-            }
-
-        } else if (newArea.getEndDate() == null) {
-
-            var latestDateArea = findLatestDateArea(areaEntities);
-
-            if (latestDateArea.getEndDate() != null && !latestDateArea.getStartDate().isBefore(newArea.getStartDate())) {
-                throw new IncorrectDateException("Incorrect dates.");
-            }
-
-            if (latestDateArea.getEndDate() == null) {
-                latestDateArea.setEndDate(newArea.getStartDate().minusDays(1));
-                areaRepository.saveAndFlush(latestDateArea);
-            } else if (!latestDateArea.getEndDate().isBefore(newArea.getStartDate())) {
-                throw new IncorrectDateException("Incorrect dates.");
-            }
-
-        } else {
-            checkDatesOverlapping(areaEntities, newArea);
-        }
-        areaRepository.saveAndFlush(newArea);
-    }
-
-    private void checkDatesOverlapping(List<AreaEntity> areaEntities, AreaEntity newArea) {
-        areaEntities.forEach(o -> {
-            if (dateUtilsComponent.areNullablePeriodsOverlapping(o.getStartDate(), o.getEndDate(),
-                    newArea.getStartDate(), newArea.getEndDate())) {
-                throw new IncorrectDateException("Incorrect dates.");
-            }
-        });
-    }
-
-    private AreaEntity findEarliestDateArea(List<AreaEntity> areaEntities) {
-        return areaEntities.stream()
-                .min((o1, o2) -> {
-
-                    if (o1.getStartDate() == null) {
-                        return -1;
-                    }
-
-                    if (o2.getStartDate() == null) {
-                        return 1;
-                    }
-
-                    return o1.getStartDate().compareTo(o2.getStartDate());
-                })
-                .orElseThrow();
-    }
-
-    private AreaEntity findLatestDateArea(List<AreaEntity> areaEntities) {
-        return areaEntities.stream()
-                .max((o1, o2) -> {
-
-                    if (o1.getEndDate() == null) {
-                        return 1;
-                    }
-
-                    if (o2.getEndDate() == null) {
-                        return -1;
-                    }
-
-                    return o1.getEndDate().compareTo(o2.getEndDate());
-                })
-                .orElseThrow();
+    private void savePremisesAreas(Collection<AreaEntity> areaEntities, AreaEntity newArea) {
+        datePeriodService.save(areaEntities, newArea, areaRepository);
     }
 
     public AreaDto getArea(int id) {

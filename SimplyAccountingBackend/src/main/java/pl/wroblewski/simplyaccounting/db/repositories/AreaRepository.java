@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface AreaRepository extends JpaRepository<AreaEntity, Integer> {
-    List<AreaEntity> findAllByPremises_IdOrderByStartDate(int premisesId);
+    List<AreaEntity> findAllByPremises_IdAndAreaType_IdOrderByStartDate(Integer premisesId, Integer areaTypeId);
+
+    List<AreaEntity> findAllByPremises_IdOrderByStartDate(Integer premisesId);
 }

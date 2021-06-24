@@ -44,4 +44,14 @@ public class LandlordController {
     public ResponseEntity<LandlordDto> getLandlord(@PathVariable int id) {
         return ResponseEntity.ok(landlordService.getLandlord(id));
     }
+
+    @GetMapping(path = "/cooperative/{cooperativeId}")
+    public ResponseEntity<List<LandlordDto>> getAllLandlordsForCooperative(@PathVariable Integer cooperativeId) {
+        return ResponseEntity.ok(landlordService.getAllLandlordsForCooperative(cooperativeId));
+    }
+
+    @GetMapping(path = "/premises/{premisesId}")
+    public ResponseEntity<List<LandlordDto>> getAllLandlordsForPremises(@PathVariable Integer premisesId) {
+        return ResponseEntity.ok(landlordService.getAllLandlordsForPremises(premisesId));
+    }
 }

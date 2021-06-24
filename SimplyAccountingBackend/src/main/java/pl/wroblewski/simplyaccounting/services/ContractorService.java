@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ContractorService {
 
-    private final static int CONTRACTOR_ACCOUNT_TYPE_ID = 3;
     private final ContractorRepository contractorRepository;
     private final ConverterService converterService;
     private final AccountService accountService;
@@ -38,7 +37,7 @@ public class ContractorService {
 
     public ContractorDto createContractor(ContractorDto contractor) {
         var contractorEntity = converterService.contractorDtoToEntity(contractor);
-        contractorEntity.setAccount(accountService.createAccount(CONTRACTOR_ACCOUNT_TYPE_ID));
+        contractorEntity.setAccount(accountService.createContractorAccount());
         return converterService.contractorEntityToDto(contractorRepository.save(contractorEntity));
     }
 
@@ -49,5 +48,9 @@ public class ContractorService {
                 .nip(contractor.getNip())
                 .build();
         return converterService.contractorEntityToDto(contractorRepository.save(contractorEntity));
+    }
+
+    public void checkContractorExists(int contractorId) {
+        getContractorEntity(contractorId);
     }
 }

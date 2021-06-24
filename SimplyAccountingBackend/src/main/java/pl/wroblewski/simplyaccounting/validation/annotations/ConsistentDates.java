@@ -13,7 +13,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConsistentDates {
-    String message() default "End date must be after begin date and both must be in the future";
+
+    String message() default "Begin date must not be before end date.";
 
     Class<?>[] groups() default {};
 

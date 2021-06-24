@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wroblewski.simplyaccounting.models.dtos.PremisesDto;
 
 import java.util.List;
 
@@ -13,7 +12,14 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class BuildingResponse {
-    private int id;
+
+    private Integer id;
+
     private String address;
-    private List<PremisesDto> premises;
+
+    private Integer cooperativeId;
+
+    private String cooperativeName;
+
+    private List<PremisesInBuilding> premises;
 }

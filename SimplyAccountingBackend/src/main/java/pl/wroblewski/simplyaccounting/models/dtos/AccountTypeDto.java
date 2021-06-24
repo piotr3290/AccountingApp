@@ -4,10 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wroblewski.simplyaccounting.validation.groups.CreateAccountInfo;
-import pl.wroblewski.simplyaccounting.validation.groups.OtherInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.CreateInfo;
+import pl.wroblewski.simplyaccounting.validation.groups.EditInfo;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 
@@ -17,12 +18,13 @@ import javax.validation.constraints.Positive;
 @Builder
 public class AccountTypeDto {
 
-    @Positive(groups = {CreateAccountInfo.class})
-    private int id;
+    @Positive(groups = {EditInfo.class})
+    @NotNull(groups = {EditInfo.class})
+    private Integer id;
 
-    @NotBlank(groups = {OtherInfo.class})
+    @NotBlank(groups = {CreateInfo.class, EditInfo.class})
     private String name;
 
-    @Positive(groups = {OtherInfo.class})
-    private int number;
+    @NotNull(groups = {CreateInfo.class, EditInfo.class})
+    private Integer number;
 }

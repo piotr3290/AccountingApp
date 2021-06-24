@@ -19,22 +19,42 @@ public class AccountEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_type_id", referencedColumnName = "id", nullable = false)
     private AccountTypeEntity accountType;
 
-    @OneToMany(mappedBy = "account")
-    private Collection<ContractorEntity> contractors;
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+    private ContractorEntity contractor;
 
-    @OneToMany(mappedBy = "account")
-    private Collection<CooperativeEntity> cooperatives;
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+    private CooperativeEntity cooperative;
 
-    @OneToMany(mappedBy = "account")
-    private Collection<LandlordEntity> landlords;
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+    private LandlordEntity landlord;
 
     @OneToMany(mappedBy = "account")
     private Collection<OpeningBalanceEntity> openingBalances;
+
+    public String getSubjectName() {
+        if (contractor != null) {
+            return contractor.getName();
+        } else if (landlord != null) {
+            return landlord.getFullName();
+        } else {
+            return cooperative.getName();
+        }
+    }
+
+    public Integer getSubjectId() {
+        if (contractor != null) {
+            return contractor.getId();
+        } else if (landlord != null) {
+            return landlord.getId();
+        } else {
+            return cooperative.getId();
+        }
+    }
 
 }

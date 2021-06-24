@@ -7,14 +7,14 @@ export default class ContractorService {
     }
 
     static getAllContractors() {
-        return httpRequestService.get('/contractor');
+        return httpRequestService.get('/contractors');
     }
 
     static createContractor(contractor) {
-        return httpRequestService.post('/contractor', contractor);
+        return httpRequestService.post('/contractors', contractor);
     }
 
     static editContractor(contractor) {
-        return httpRequestService.put('/contractor', contractor);
+        return httpRequestService.put('/contractors', contractor);
     }
 }

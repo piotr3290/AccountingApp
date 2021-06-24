@@ -18,7 +18,15 @@ export default class CooperativeService {
         return httpRequestService.put(`/cooperatives`, cooperative);
     }
 
-    static getCooperativesBuildings(id){
+    static getCooperativesBuildings(id) {
         return httpRequestService.get(`/cooperatives/buildings/${id}`);
+    }
+
+    static getAllCooperatives() {
+        return httpRequestService.get('/cooperatives/all');
+    }
+
+    static getPremisesCooperative(premisesId) {
+        return httpRequestService.get(`/cooperatives/premises/${premisesId}`);
     }
 }

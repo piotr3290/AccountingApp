@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import pl.wroblewski.simplyaccounting.validation.groups.CreateAccountInfo;
 import pl.wroblewski.simplyaccounting.validation.groups.OtherInfo;
 
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -19,9 +18,11 @@ import javax.validation.constraints.Positive;
 public class AccountDto {
 
     @Positive(groups = {OtherInfo.class})
-    private int id;
+    private Integer id;
 
     @Valid
     @NotNull(groups = {CreateAccountInfo.class})
     private AccountTypeDto accountType;
+
+    private Integer cooperativeId;
 }

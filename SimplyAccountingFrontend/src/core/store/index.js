@@ -2,15 +2,20 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import i18n from "@/i18n";
 import {localize} from 'vee-validate';
-import AuthorizationStorageService from "@/core/service/AuthorizationStorageService";
+import AuthorizationStorageService from "@/core/storage/AuthorizationStorageService";
+import AuthenticationService from "@/core/service/AuthenticationService";
+import LocaleStorageService from "@/core/storage/LocaleStorageService";
+import ThemeStorageService from "@/core/storage/ThemeStorageService";
+import vuetify from "@/core/plugins/vuetify";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         isLoading: false,
-        locale: 'pl',
-        token: null
+        locale: 'en',
+        token: null,
+        isDarkTheme: false
     },
     getters: {
         getLoadingState: state => {
@@ -24,6 +29,13 @@ export default new Vuex.Store({
         },
         isAuthenticated: state => {
             return state.token != null;
+        },
+        isTokenValid: state => {
+            //console.log(state.token != null && AuthenticationService.isTokenValid(state.token))
+            return AuthenticationService.isTokenValid(state.token);
+        },
+        isDarkTheme: state => {
+            return state.isDarkTheme;
         }
     },
     mutations: {
@@ -37,6 +49,7 @@ export default new Vuex.Store({
             state.locale = locale;
             i18n.locale = locale;
             localize(locale);
+            LocaleStorageService.saveLocaleInStorage(locale);
         },
         authenticate(state, locale) {
             AuthorizationStorageService.saveTokenInStorage(locale);
@@ -48,6 +61,34 @@ export default new Vuex.Store({
         },
         loadJwtFromStorage(state) {
             state.token = AuthorizationStorageService.getTokenFromStorage();
+        },
+        loadLocaleFromStorage(state) {
+            if (LocaleStorageService.isLocaleSaved()) {
+                const locale = LocaleStorageService.getLocaleFromStorage();
+                state.locale = locale;
+                i18n.locale = locale;
+                localize(locale);
+            }
+        },
+        changeTheme(state, isDarkTheme) {
+            state.isDarkTheme = isDarkTheme;
+            vuetify.framework.theme.dark = isDarkTheme;
+            ThemeStorageService.saveThemeInStorage(isDarkTheme);
+
+        },
+        loadThemeFromStorage(state) {
+            if (ThemeStorageService.isThemeSaved()) {
+                const isDarkTheme = ThemeStorageService.getThemeFromStorage() === 'true';
+                state.isDarkTheme = isDarkTheme;
+                vuetify.framework.theme.dark = isDarkTheme;
+            }
+        }
+    },
+    actions: {
+        checkTokenValidity(context) {
+            if (!context.getters.isTokenValid) {
+                context.commit('logOut');
+            }
         }
     }
 });

@@ -1,5 +1,5 @@
 import axios from "axios";
-import AuthorizationStorageService from "@/core/service/AuthorizationStorageService";
+import AuthorizationStorageService from "@/core/storage/AuthorizationStorageService";
 
 export default class HttpRequestService {
 
