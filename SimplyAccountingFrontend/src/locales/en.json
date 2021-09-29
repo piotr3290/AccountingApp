@@ -1,0 +1,318 @@
+{
+  "hello": "hi",
+  "common": {
+    "create": "create",
+    "edit": "edit",
+    "ok": "ok",
+    "save": "save",
+    "cancel": "cancel",
+    "search": "search",
+    "menu": "menu",
+    "moreOptions": "more options",
+    "street": "street",
+    "houseNumber": "house number",
+    "premisesNumber": "premises number",
+    "postalCode": "postal code",
+    "city": "city",
+    "email": "e-mail",
+    "success": "success",
+    "add": "add",
+    "firstName": "first name",
+    "middleName": "middle name",
+    "lastName": "last name",
+    "phoneNumber": "phone number",
+    "emailAddress": "email address",
+    "address": "address",
+    "logout": "logout",
+    "signIn": "sign in",
+    "login": "login",
+    "username": "username",
+    "password": "password",
+    "nip": "NIP",
+    "from": "from",
+    "to": "to",
+    "year": "year",
+    "realizationDate": "realization date",
+    "all": "all",
+    "debits": "debits",
+    "credits": "credits",
+    "month": "month",
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "calculateAdvance": "calculate advance",
+    "calculateClosingBalance": "calculate closing balances",
+    "calculate": "calculate",
+    "configuration": "Additional configuration",
+    "notFound": "page not found",
+    "options": "options"
+  },
+  "error": {
+    "defaultMessage": "There was an unexpected error.",
+    "loginMessage": "There was an error while logging in."
+  },
+  "cooperative": {
+    "cooperative": "cooperative",
+    "cooperatives": "cooperatives",
+    "name": "cooperative name",
+    "regon": "REGON",
+    "messages": {
+      "created": "Cooperative has been successfully created.",
+      "edited": "Cooperative's data have been successfully updated.",
+      "noCooperative": "No cooperative created yet.",
+      "noBuilding": "No building in the cooperative.",
+      "notFound": "Cooperative not found."
+    }
+  },
+  "building": {
+    "building": "building",
+    "buildings": "buildings",
+    "messages": {
+      "created": "Building has been successfully created.",
+      "edited": "Building's data have been successfully updated.",
+      "noPremises": "No premises in the building.",
+      "notFound": "Building not found."
+    }
+  },
+  "premises": {
+    "premise": "premises",
+    "premises": "premises",
+    "type": "premises' type",
+    "types": "premises types",
+    "messages": {
+      "created": "Premises have been successfully created.",
+      "edited": "Premises' data have been successfully updated.",
+      "notFound": "Premises not found.",
+      "chooseType": "Please choose premises type."
+    }
+  },
+  "landlord": {
+    "landlord": "landlord",
+    "landlords": "landlords",
+    "messages": {
+      "created": "Landlord has been successfully created.",
+      "edited": "Landlord's data have been successfully updated.",
+      "notFound": "Landlord not found.",
+      "noLandlords": "No landlord has been found."
+    }
+  },
+  "contractor": {
+    "contractor": "contractor",
+    "contractors": "contractors",
+    "name": "contractor name",
+    "messages": {
+      "created": "Contractor has been successfully created.",
+      "edited": "Contractor's data have been successfully updated.",
+      "notFound": "Contractors not found.",
+      "noContractors": "No contractor has been found."
+    }
+  },
+  "area": {
+    "surface": "surface",
+    "surfaces": "surfaces",
+    "type": "area's type",
+    "types": "area types",
+    "messages": {
+      "deleted": "The area was successfully deleted.",
+      "created": "The area has been successfully created.",
+      "edited": "The area's data have been successfully updated.",
+      "chooseType": "Please choose area type.",
+      "notFound": "Area not found.",
+      "noPremises": "Premises error.",
+      "noArea": "No area added yet."
+    }
+  },
+  "peopleNumber": {
+    "number": "number of people",
+    "messages": {
+      "deleted": "The number of people was successfully deleted.",
+      "created": "The number of people has been successfully created.",
+      "edited": "The number of people data have been successfully updated.",
+      "noPeopleNumber": "No people number has been added yet.",
+      "notFound": "Number of people not found. "
+    }
+  },
+  "openingBalance": {
+    "openingBalance": "opening balance",
+    "openingBalances": "opening balances",
+    "balance": "balance",
+    "messages": {
+      "noBalance": "No opening balance has been found.",
+      "created": "The opening balance has been successfully created.",
+      "notFound": "Opening balance not found.",
+      "accountError": "Account error.",
+      "calculated": "Closing balances have been calculated."
+    }
+  },
+  "invoice": {
+    "invoice": "invoice",
+    "invoices": "invoices",
+    "type": "invoice type",
+    "value": "value",
+    "accountType": "invoice account type",
+    "messages": {
+      "chooseType": "Please choose invoice type.",
+      "chooseContractor": "Please choose contractor.",
+      "noInvoices": "No invoice has been found.",
+      "notFound": "Invoice not found."
+    }
+  },
+  "premisesLandlord": {
+    "messages": {
+      "deleted": "Successfully deleted.",
+      "noPremisesLandlord": "No landlord added yet.",
+      "created": "Landlord has been successfully added to premises.",
+      "edited": "Landlord's data in premises have been successfully updated.",
+      "notFound": "Landlord not found.",
+      "noPremises": "Premises error.",
+      "chooseLandlord": "Please choose landlord."
+    }
+  },
+  "consumption": {
+    "consumption": "consumption",
+    "consumptions": "consumptions",
+    "value": "value",
+    "chargeType": "account",
+    "messages": {
+      "deleted": "Consumption has been successfully deleted.",
+      "created": "Consumption has been successfully created.",
+      "edited": "Consumption's data have been successfully updated.",
+      "notFound": "Consumption not found.",
+      "noPremises": "Premises error.",
+      "noConsumption": "No consumption added yet.",
+      "chooseChargeType": "Please choose charge account."
+    }
+  },
+  "charge": {
+    "chargesPlan": "charges plan",
+    "formula": "formula",
+    "type": "charge account",
+    "element": "charge element",
+    "messages": {
+      "elementDeleted": "Charge element has been successfully deleted.",
+      "noChargeElement": "No charge element added to charges plan yet.",
+      "chargeElementError": "An error occurred while loading.",
+      "created": "Charge element has been successfully created.",
+      "edited": "Charge element's data has been successfully edited.",
+      "chooseType": "Please choose charge account.",
+      "notFound": "Charge not found.",
+      "loadingError": "There was an error while loading."
+    }
+  },
+  "rate": {
+    "rate": "rate",
+    "rates": "rates",
+    "level": "level",
+    "value": "rate value",
+    "chargeType": "charge account",
+    "levels": {
+      "GENERAL": "general",
+      "COOPERATIVE": "cooperative",
+      "BUILDING": "building",
+      "PREMISES": "premises"
+    },
+    "messages": {
+      "noRate": "No rate has been added yet.",
+      "deleted": "Rate has been deleted.",
+      "created": "Rate has been created.",
+      "edited": "Rate has been edited.",
+      "chooseCooperative": "Please choose cooperative.",
+      "chooseBuilding": "Please choose building.",
+      "choosePremises": "Please choose premises.",
+      "chooseChargeType": "Please choose charge account.",
+      "notFound": "Rate not found.",
+      "generalInfo": "Rate for all housing cooperatives."
+    }
+  },
+  "areaType": {
+    "name": "area type",
+    "messages": {
+      "notFound": "Area type not found.",
+      "deleted": "Area type has been deleted.",
+      "noAreaType": "No area type has been added yet.",
+      "created": "Area type has been created.",
+      "edited": "Area type's data has been edited."
+    }
+  },
+  "premisesType": {
+    "name": "premises type",
+    "messages": {
+      "notFound": "Premises type not found.",
+      "noPremisesType": "No premises type has been added yet.",
+      "deleted": "Premises type has been deleted.",
+      "created": "Premises type has been created.",
+      "edited": "Premises type's data has been edited."
+    }
+  },
+  "account": {
+    "plan": "accounts plan",
+    "name": "account name",
+    "number": "account number",
+    "type": "account type",
+    "messages": {
+      "notFound": "Account not found.",
+      "edited": "Account has been edited."
+    }
+  },
+  "invoiceType": {
+    "name": "cost account name",
+    "number": "cost account number",
+    "messages": {
+      "noInvoiceType": "No invoice account added yet.",
+      "edited": "Cost account has been edited.",
+      "created": "Cost account has been created.",
+      "notFound": "Cost account not found."
+    }
+  },
+  "chargeType": {
+    "name": "advance account name",
+    "number": "advance account number",
+    "messages": {
+      "noChargeType": "No advance account added yet.",
+      "edited": "Advance account has been edited.",
+      "created": "Advance account has been created.",
+      "notFound": "Advance account not found."
+    }
+  },
+  "payment": {
+    "value": "amount",
+    "bank": "bank",
+    "contractorPayment": "payment for invoice",
+    "landlordPayment": "payment from landlord",
+    "messages": {
+      "created": "Payment has been created.",
+      "edited": "Payment has been edited.",
+      "chooseContractor": "Please choose contractor.",
+      "chooseLandlord": "Please choose landlord.",
+      "notFound": "Payment not found.",
+      "noPayment": "No payment has been added yet."
+    }
+  },
+  "advance": {
+    "advance": "advance",
+    "advances": "advances",
+    "amount": "amount",
+    "chargeType": "charge account",
+    "messages": {
+      "noAdvance": "Not found any advance in selected year.",
+      "notFound": "Advance not found.",
+      "created": "Advance has been created.",
+      "edited": "Advance has been edited.",
+      "deleted": "Advance has been deleted.",
+      "chooseChargeType": "Please choose charge account.",
+      "chooseLandlord": "Please choose landlord.",
+      "calculated": "Advances have been calculated."
+    }
+  }
+}

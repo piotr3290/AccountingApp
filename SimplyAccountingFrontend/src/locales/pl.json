@@ -1,0 +1,319 @@
+{
+  "hello": "Witam",
+  "common": {
+    "create": "stwórz",
+    "edit": "edytuj",
+    "ok": "ok",
+    "save": "zapisz",
+    "cancel": "anuluj",
+    "search": "wyszukaj",
+    "menu": "menu",
+    "moreOptions": "dodatkowe opcje",
+    "street": "ulica",
+    "houseNumber": "numer domu",
+    "premisesNumber": "numer lokalu",
+    "postalCode": "kod pocztowy",
+    "city": "miasto",
+    "email": "e-mail",
+    "success": "sukces",
+    "add": "dodaj",
+    "firstName": "imię",
+    "middleName": "drugie imię",
+    "lastName": "nazwisko",
+    "phoneNumber": "numer telefonu",
+    "emailAddress": "adres email",
+    "address": "adres",
+    "logout": "wyloguj",
+    "signIn": "zaloguj",
+    "login": "logowanie",
+    "username": "nazwa użytkownika",
+    "password": "hasło",
+    "nip": "NIP",
+    "from": "od",
+    "to": "do",
+    "year": "rok",
+    "realizationDate": "data realizacji",
+    "all": "wszystkie",
+    "debits": "winien",
+    "credits": "ma",
+    "month": "miesiąc",
+    "months": [
+      "Styczeń",
+      "Luty",
+      "Marzec",
+      "Kwiecień",
+      "Maj",
+      "Czerwiec",
+      "Lipiec",
+      "Sierpień",
+      "Wrzesień",
+      "Październik",
+      "Listopad",
+      "Grudzień"
+    ],
+    "calculateAdvance": "oblicz zaliczki",
+    "calculateClosingBalance": "oblicz bilanse zamknięcia",
+    "calculate": "oblicz",
+    "configuration": "Dodatkowa konfiguracja",
+    "notFound": "strona nie znaleziona",
+    "options": "opcje"
+  },
+  "error": {
+    "defaultMessage": "Wystąpił nieoczekiwany błąd.",
+    "loginMessage": "Wystąpił problem podczas logowania."
+  },
+  "cooperative": {
+    "cooperative": "wspólnota",
+    "cooperatives": "wspólnoty",
+    "name": "nazwa wspólnoty",
+    "regon": "REGON",
+    "messages": {
+      "created": "Wpólnota została utworzona.",
+      "edited": "Dane wspólnoty zostały zmienione.",
+      "noCooperative": "Brak wspólnot.",
+      "noBuilding": "Brak budynków we wspólnocie.",
+      "notFound": "Nie znaleziono wspólnoty."
+    }
+  },
+  "building": {
+    "building": "budynek",
+    "buildings": "budynki",
+    "messages": {
+      "created": "Budynek został utworzony.",
+      "edited": "Dane budynku zostały zmienione.",
+      "noPremises": "Brak lokali w budynku.",
+      "notFound": "Nie znaleziono budynku."
+    }
+  },
+  "premises": {
+    "premise": "lokal",
+    "premises": "lokale",
+    "type": "rodzaj lokalu",
+    "types": "rodzaje lokali",
+    "messages": {
+      "created": "Lokal został utworzony.",
+      "edited": "Dane lokalu zostały zmienione.",
+      "notFound": "Nie znaleziono lokalu.",
+      "chooseType": "Wybierz rodzaj lokalu."
+    }
+  },
+  "landlord": {
+    "landlord": "właścicel",
+    "landlords": "właścicele",
+    "messages": {
+      "created": "Właściciel został utworzony.",
+      "edited": "Dane właściciela zostały zmienione.",
+      "notFound": "Nie znaleziono właściciela.",
+      "noLandlords": "Nie znaleziono żadnego właściciela."
+    }
+  },
+  "contractor": {
+    "contractor": "kotrahent",
+    "contractors": "kotrahenci",
+    "name": "nazwa kontrahenta",
+    "messages": {
+      "created": "Kontrahent został utworzony.",
+      "edited": "Dane kontrahenta zostały zmienione.",
+      "notFound": "Nie znaleziono kontrahenta.",
+      "noContractors": "Nie znaleziono żadnego kontrahenta."
+    }
+  },
+  "area": {
+    "surface": "powierzchnia",
+    "surfaces": "powierzchnie",
+    "type": "rodzaj powierzchni",
+    "types": "rodzje powierzchni",
+    "messages": {
+      "deleted": "Powierzchnia została usunięta.",
+      "created": "Powierzchnia została dodana.",
+      "edited": "Dane powierzchni zostały zmienione.",
+      "chooseType": "Wybierz rodzaj powierzchni.",
+      "notFound": "Nie znaleziono powierzchni.",
+      "noPremises": "Błąd lokalu.",
+      "noArea": "Brak powierzchni."
+    }
+  },
+  "peopleNumber": {
+    "number": "liczba osób",
+    "numbers": "liczby osób",
+    "messages": {
+      "deleted": "Liczba osób została usunięta.",
+      "created": "Liczba osób została dodana.",
+      "edited": "Liczba osób została zmieniona.",
+      "noPeopleNumber": "Brak liczby osób.",
+      "notFound": "Nie znaleziono liczby osób. "
+    }
+  },
+  "openingBalance": {
+    "openingBalance": "bilans otwarcia",
+    "openingBalances": "bilanse otwarcia",
+    "balance": "bilans",
+    "messages": {
+      "noBalance": "Brak bilansów otwarcia.",
+      "created": "Bilans otwarcia został utworzony.",
+      "notFound": "Nie znaleziono bilansu otwarcia.",
+      "accountError": "Błąd konta.",
+      "calculated": "Closing balances have been calculated."
+    }
+  },
+  "invoice": {
+    "invoice": "faktura",
+    "invoices": "faktury",
+    "type": "konto kosztów",
+    "value": "wartość",
+    "accountType": "konto kosztów",
+    "messages": {
+      "chooseType": "Wybierz konto kosztów.",
+      "chooseContractor": "Wybierz kontrahenta.",
+      "noInvoices": "Brak faktur.",
+      "notFound": "Nie znaleziono faktury."
+    }
+  },
+  "premisesLandlord": {
+    "messages": {
+      "deleted": "Usunięto właściciela z lokalu.",
+      "noPremisesLandlord": "Brak właścicieli w lokalu.",
+      "created": "Dodano włąsciciela do lokalu.",
+      "edited": "Właściciel w lokalu został zmieniony.",
+      "notFound": "Nie znaleziono właściciela w lokalu.",
+      "noPremises": "Błąs lokalu.",
+      "chooseLandlord": "Wybierz włąsciciela."
+    }
+  },
+  "consumption": {
+    "consumption": "zużycie",
+    "consumptions": "zużycia",
+    "value": "wysokość",
+    "chargeType": "konto opłat",
+    "messages": {
+      "deleted": "Zużycie zostało usunięte.",
+      "created": "Zużycie zostało stworzone.",
+      "edited": "Zużycie zotało zmienione.",
+      "notFound": "Nie znaleziono zużycia.",
+      "noPremises": "Błąd lokalu.",
+      "noConsumption": "Nie dodano jeszcze zużycia.",
+      "chooseChargeType": "Wybierz konto opłat."
+    }
+  },
+  "charge": {
+    "chargesPlan": "plan opłat",
+    "formula": "wzór",
+    "type": "konto opłat",
+    "element": "element opłat",
+    "messages": {
+      "elementDeleted": "Element opłat został usunięty.",
+      "noChargeElement": "Nie dodano jeszcze żadnego elementu opłat.",
+      "chargeElementError": "Błąd elementu opłat.",
+      "created": "Opłata została utworzona.",
+      "edited": "Opłata została zmieniona.",
+      "chooseType": "Wybierz konto opłat.",
+      "notFound": "Nie znaleziono opłaty.",
+      "loadingError": "Błąd ładowania."
+    }
+  },
+  "rate": {
+    "rate": "stawka",
+    "rates": "stawki",
+    "level": "poziom",
+    "value": "wysokość",
+    "chargeType": "konto opłat",
+    "levels": {
+      "GENERAL": "ogólny",
+      "COOPERATIVE": "wpólnota",
+      "BUILDING": "budynek",
+      "PREMISES": "lokal"
+    },
+    "messages": {
+      "noRate": "Nie dodano jeszcze żadnej stawki.",
+      "deleted": "Stawka została usunięta.",
+      "created": "Stawka została utworzona.",
+      "edited": "Stawka została zmieniona.",
+      "chooseCooperative": "Wybierz wspólnotę.",
+      "chooseBuilding": "Wybierz budynek.",
+      "choosePremises": "Wybierz lokal.",
+      "chooseChargeType": "Wybierz konto opłat.",
+      "notFound": "Nie znaleziono stawki.",
+      "generalInfo": "Stawka ogólna - do wszystkich wspólnot."
+    }
+  },
+  "areaType": {
+    "name": "rodzaj powierzchni",
+    "messages": {
+      "notFound": "Nie znaleziono rodzaju powierzchni.",
+      "deleted": "Typ powierzchni został usunięty.",
+      "noAreaType": "Nie dodano jeszcze rodzaju powierzchni.",
+      "created": "Typ powierzchni został utworzony.",
+      "edited": "Typ powierzchni został zmieniony."
+    }
+  },
+  "premisesType": {
+    "name": "rodzaj lokalu",
+    "messages": {
+      "notFound": "Nie znaleziono rodzaju lokalu.",
+      "noPremisesType": "Nie dodano jeszcze żadnego rodzaju lokalu.",
+      "deleted": "Rodzaj lokalu został usunięty.",
+      "created": "Rodzaj lokalu został utworzony.",
+      "edited": "Rodzaj lokalu został edytowany."
+    }
+  },
+  "account": {
+    "plan": "plan kont",
+    "name": "nazwa konta",
+    "number": "numer konta",
+    "type": "typ konta",
+    "messages": {
+      "notFound": "Nie znaleziono konta.",
+      "edited": "Konto zostało edytowane."
+    }
+  },
+  "invoiceType": {
+    "name": "nazwa konta kosztów",
+    "number": "numer konta kosztów",
+    "messages": {
+      "noInvoiceType": "Nie dodano jeszcze konta kosztów.",
+      "edited": "Konto kosztów zostało edytowane.",
+      "created": "Konto kosztów zostało utworzone.",
+      "notFound": "Nie znaleziono konata kosztów."
+    }
+  },
+  "chargeType": {
+    "name": "nazwa konta opłat",
+    "number": "numer konta opłat",
+    "messages": {
+      "noChargeType": "Brak konta opłat.",
+      "edited": "Konto opłat zostało edytowane.",
+      "created": "Konto opłat zostało utworzone.",
+      "notFound": "Nie znaleziono konta opłat."
+    }
+  },
+  "payment": {
+    "value": "kwota",
+    "bank": "bank",
+    "contractorPayment": "opłaty",
+    "landlordPayment": "wpłaty",
+    "messages": {
+      "created": "Płatność została utworzona.",
+      "edited": "Płatność została edytowana.",
+      "chooseContractor": "Wybierz kontrahenta.",
+      "chooseLandlord": "Wybierz właściciela.",
+      "notFound": "Nie znaleziono płatności.",
+      "noPayment": "Nie dodano jeszcze płatności."
+    }
+  },
+  "advance": {
+    "advance": "zaliczka",
+    "advances": "zaliczki",
+    "amount": "kwota",
+    "chargeType": "konto opłat",
+    "messages": {
+      "noAdvance": "Brak zaliczek w wybranym roku.",
+      "notFound": "Nie znaleziono zaliczki.",
+      "created": "Zaliczka została utworzona.",
+      "edited": "Zaliczka została edytowana.",
+      "deleted": "Zaliczka została usunięta.",
+      "chooseChargeType": "Wybierz konto opłat.",
+      "chooseLandlord": "Wybierz właściciela.",
+      "calculated": "Zaliczki zostały obliczone."
+    }
+  }
+}

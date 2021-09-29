@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "simplyaccounting.app.jwt.expiration",
+      "type": "java.lang.Integer",
+      "description": "JWT expiration time in milliseconds."
+    },
+    {
+      "name": "simplyaccounting.app.jwt.secret",
+      "type": "java.lang.String",
+      "description": "JWT secret key."
+    }
+  ]
+}

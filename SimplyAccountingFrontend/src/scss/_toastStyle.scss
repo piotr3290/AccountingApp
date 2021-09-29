@@ -1,0 +1,19 @@
+@import "src/scss/colors";
+
+$vt-color-default: $primary-light;
+$vt-color-info: $info-light;
+$vt-color-success: $success-light;
+$vt-color-error: $error-light;
+$vt-color-warning: $warning-light;
+
+$vt-text-color-success: #242424;
+$vt-text-color-warning: #242424;
+
+
+@import "~vue-toastification/src/scss/_variables";
+@import "~vue-toastification/src/scss/_toastContainer";
+@import "~vue-toastification/src/scss/_toast";
+@import "~vue-toastification/src/scss/_closeButton";
+@import "~vue-toastification/src/scss/_progressBar";
+@import "~vue-toastification/src/scss/_icon";
+@import "~vue-toastification/src/scss/animations/_bounce";
